@@ -64,7 +64,9 @@ function AdminDashboard() {
         <AdminSidebar page="dashboard" />
         <div className="lg:!w-[calc(100%-300px)] w-full">
           <AdminNavbar page="Dashboard" />
-          <div>Dashboard</div>
+          <div className="sm:pl-[30px] pl-[12px]">
+            <div className="text-2xl py-3 font-medium text-nevyblue">Dashboard</div>
+          </div>
           <Formik
             initialValues={
               fetchedCategories
@@ -93,14 +95,14 @@ function AdminDashboard() {
                 <Form>
                   <FieldArray name="categories">
                     {({ push, remove }) => (
-                      <div className="sm:p-[30px] p-[12px]">
+                      <div className="sm:p-[30px] !pt-0">
                         <div className="px-[15px]">
                           {values.categories.map((category, index) => (
                             <div key={index}>
                               <div className="mt-5">
-                                <div className="flex justify-end items-center">
+                                <div className="flex justify-end items-center border-b-2 border-gray pb-2 mb-2">
                                   <div className="flex justify-center items-start">
-                                    <div className="flex justify-end gap-3 items-center ">
+                                    <div className="flex justify-end gap-3 items-center">
                                       {values.categories.length > 1 && (
                                         <button
                                           type="button"
@@ -125,13 +127,12 @@ function AdminDashboard() {
                                     </div>
                                   </div>
                                 </div>
-                                <div className="flex justify-between gap-3 items-end">
-                                  <div className="grid md:grid-cols-3 grid-cols-1 sm:gap-[27px] gap-[16px] w-full">
+                                <div className="flex justify-between gap-3 items-end mb-4">
+                                  <div className="grid md:grid-cols-2 xl:grid-cols-3 grid-cols-1 sm:gap-[27px] gap-[16px] w-full">
                                     <TextInput
                                       label="Category"
                                       name={`categories.${index}.category`}
                                       placeholder="Enter Category"
-                                      isRequired={true}
                                     />
                                   </div>
                                 </div>
@@ -139,34 +140,32 @@ function AdminDashboard() {
                                   name={`categories.${index}.subcategories`}
                                 >
                                   {({ push, remove }) => (
-                                    <div className="flex flex-col">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 items-center">
                                       {category.subcategories?.map(
                                         (subcategory, subIndex) => (
                                           <div
                                             key={subIndex}
-                                            className="flex justify-between gap-3 items-end"
+                                            className="flex"
                                           >
-                                            <div className="grid md:grid-cols-3 grid-cols-1 sm:gap-[27px] gap-[16px] w-full">
+                                            <div className="flex gap-4 w-full items-center">
                                               <TextInput
-                                                label={`Subcategory ${
-                                                  subIndex + 1
-                                                }`}
+                                                label={`Subcategory ${subIndex + 1
+                                                  }`}
                                                 name={`categories.${index}.subcategories.${subIndex}`}
                                                 placeholder="Enter Subcategory"
-                                                isRequired={true}
                                               />
                                               {category.subcategories.length >
                                                 1 && (
-                                                <button
-                                                  type="button"
-                                                  onClick={() =>
-                                                    remove(subIndex)
-                                                  }
-                                                  className="text-red bg-white border-red border-2 w-[46px] h-[46px] rounded-md flex justify-center items-center"
-                                                >
-                                                  <RiDeleteBinLine className="text-[20px]" />
-                                                </button>
-                                              )}
+                                                  <button
+                                                    type="button"
+                                                    onClick={() =>
+                                                      remove(subIndex)
+                                                    }
+                                                    className="text-red bg-white border-red border-2 w-[46px] h-[46px] rounded-md flex justify-center items-center self-end"
+                                                  >
+                                                    <RiDeleteBinLine className="text-[20px]" />
+                                                  </button>
+                                                )}
                                             </div>
                                           </div>
                                         )
@@ -174,7 +173,7 @@ function AdminDashboard() {
                                       <button
                                         type="button"
                                         onClick={() => push("")}
-                                        className="font-medium text-primary w-[45px] h-[45px] border-2 border-[#002060] rounded-md flex justify-center items-center gap-[10px]"
+                                        className="font-medium text-primary w-[45px] h-[45px] border-2 border-[#002060] rounded-md flex justify-center items-center gap-[10px] self-end"
                                       >
                                         <BiPlus className="text-[24px] w-[24px] h-[24px]" />
                                       </button>

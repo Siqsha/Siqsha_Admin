@@ -19,11 +19,10 @@ function AdminSidebar({ page }) {
         <ul className="text-gray-500 font-semibold flex flex-col gap-2">
           <Link
             to="/admin/dashboard"
-            className={`rounded-[8px] p-[17px] group hover:bg-primary ${
-              page === "dashboard"
+            className={`rounded-[8px] p-[17px] group hover:bg-primary ${page === "dashboard"
                 ? "bg-primary text-white"
                 : "bg-white text-nevyblue"
-            }`}
+              }`}
           >
             <Link to="/admin/dashboard" className="">
               <div className="flex items-center gap-[15px] hover:text-white">
@@ -37,11 +36,10 @@ function AdminSidebar({ page }) {
 
           <Link
             to="/admin/user-settings"
-            className={`rounded-[8px] p-[17px] group hover:bg-primary ${
-              page === "usersetting"
+            className={`rounded-[8px] p-[17px] group hover:bg-primary ${page === "usersetting"
                 ? "bg-primary text-white"
                 : "bg-white text-nevyblue"
-            }`}
+              }`}
           >
             <Link to="/admin/user-settings" className="">
               <div className="flex items-center gap-[15px] hover:text-white">
@@ -53,11 +51,10 @@ function AdminSidebar({ page }) {
             </Link>
           </Link>
           <Link
-            className={`rounded-[8px] p-[17px] group hover:bg-primary ${
-              page === "students"
+            className={`rounded-[8px] p-[17px] group hover:bg-primary ${page === "students"
                 ? "bg-primary text-white"
                 : "bg-white text-nevyblue"
-            }`}
+              }`}
           >
             <Link to="/admin/students" className="">
               <div className="flex items-center gap-[15px] hover:text-white">
@@ -70,11 +67,10 @@ function AdminSidebar({ page }) {
           </Link>
           <Link
             to="/admin/teachers"
-            className={`rounded-[8px] p-[17px] group hover:bg-primary ${
-              page === "teachers"
+            className={`rounded-[8px] p-[17px] group hover:bg-primary ${page === "teachers"
                 ? "bg-primary text-white"
                 : "bg-white text-nevyblue"
-            }`}
+              }`}
           >
             <Link to="/admin/teachers" className="">
               <div className="flex items-center gap-[15px] hover:text-white">
@@ -87,11 +83,10 @@ function AdminSidebar({ page }) {
           </Link>
           <Link
             to="/admin/approval"
-            className={`rounded-[8px] p-[17px] group hover:bg-primary ${
-              page === "approval"
+            className={`rounded-[8px] p-[17px] group hover:bg-primary ${page === "approval"
                 ? "bg-primary text-white"
                 : "bg-white text-nevyblue"
-            }`}
+              }`}
           >
             <Link to="/admin/approval" className="">
               <div className="flex items-center gap-[15px] hover:text-white">

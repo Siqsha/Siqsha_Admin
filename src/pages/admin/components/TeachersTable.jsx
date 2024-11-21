@@ -94,8 +94,8 @@ function TeachersTable() {
 
   return (
     <div className="container mx-auto p-4 h-[calc(100%-300px)]">
-      <div className="flex justify-between items-center mb-4">
-        <div className="w-1/3">
+      <div className="flex justify-between items-center mb-4 xl:gap-[200px] lg:gap-[150px] md:gap-[100px] gap-[10px] sm:flex-nowrap flex-wrap">
+        <div className="w-full">
           <input
             type="text"
             placeholder="Search"
@@ -104,7 +104,7 @@ function TeachersTable() {
             onChange={handleSearchChange}
           />
         </div>
-        <div className="w-1/6">
+        <div className="w-full">
           <select
             className="w-full p-2 border border-gray-300 rounded-md"
             value={statusFilter}
@@ -115,7 +115,7 @@ function TeachersTable() {
             <option value="Inactive">Inactive</option>
           </select>
         </div>
-        <div className="w-1/6">
+        <div className="w-full">
           <input
             type="date"
             className="w-full p-2 border border-gray-300 rounded-md"
@@ -154,9 +154,8 @@ function TeachersTable() {
                 <td className="py-3 px-6 text-left">{user.role}</td>
                 <td className="py-3 px-6 text-left">
                   <span
-                    className={`${
-                      user.isOnline ? "text-green-500" : "text-red-500"
-                    }`}
+                    className={`${user.isOnline ? "text-green-500" : "text-red-500"
+                      }`}
                   >
                     {user.isOnline ? "Active" : "Inactive"}
                   </span>
@@ -192,11 +191,10 @@ function TeachersTable() {
       {/* Pagination Controls */}
       <div className="flex justify-center items-center mt-4">
         <button
-          className={`mx-2 px-4 py-2 rounded-md ${
-            currentPage === 1
-              ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-              : "bg-blue-500 text-white hover:bg-blue-600"
-          }`}
+          className={`mx-2 px-4 py-2 rounded-md ${currentPage === 1
+            ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+            : "bg-blue-500 text-white hover:bg-blue-600"
+            }`}
           onClick={() =>
             handlePageChange(currentPage > 1 ? currentPage - 1 : 1)
           }
@@ -208,11 +206,10 @@ function TeachersTable() {
         <span className="mx-2 text-gray-600">{`Page ${currentPage} of ${totalPages}`}</span>
 
         <button
-          className={`mx-2 px-4 py-2 rounded-md ${
-            currentPage === totalPages
-              ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-              : "bg-blue-500 text-white hover:bg-blue-600"
-          }`}
+          className={`mx-2 px-4 py-2 rounded-md ${currentPage === totalPages
+            ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+            : "bg-blue-500 text-white hover:bg-blue-600"
+            }`}
           onClick={() =>
             handlePageChange(
               currentPage < totalPages ? currentPage + 1 : totalPages

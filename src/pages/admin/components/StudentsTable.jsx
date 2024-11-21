@@ -75,8 +75,8 @@ const StudentsTable = () => {
 
   return (
     <div className="container mx-auto p-4 h-[calc(100%-300px)]">
-      <div className="flex justify-between items-center mb-4">
-        <div className="w-1/3">
+      <div className="flex justify-between items-center mb-4 xl:gap-[200px] lg:gap-[150px] md:gap-[100px] gap-[10px] sm:flex-nowrap flex-wrap">
+        <div className="w-full">
           <input
             type="text"
             placeholder="Search"
@@ -85,7 +85,7 @@ const StudentsTable = () => {
             onChange={handleSearchChange}
           />
         </div>
-        <div className="w-1/6">
+        <div className="w-full">
           <select
             className="w-full p-2 border border-gray-300 rounded-md"
             value={statusFilter}
@@ -96,7 +96,7 @@ const StudentsTable = () => {
             <option value="Inactive">Inactive</option>
           </select>
         </div>
-        <div className="w-1/6">
+        <div className="w-full">
           <input
             type="date"
             className="w-full p-2 border border-gray-300 rounded-md"
@@ -135,9 +135,8 @@ const StudentsTable = () => {
                 <td className="py-3 px-6 text-left">{user.role}</td>
                 <td className="py-3 px-6 text-left">
                   <span
-                    className={`${
-                      user.isOnline ? "text-green-500" : "text-red"
-                    }`}
+                    className={`${user.isOnline ? "text-green-500" : "text-red"
+                      }`}
                   >
                     {user.isOnline === true ? "Active" : "Inactive"}
                   </span>

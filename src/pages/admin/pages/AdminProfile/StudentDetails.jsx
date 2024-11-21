@@ -8,7 +8,7 @@ function StudentDetails() {
     <>
       <div className="!flex bg-gray1 justify-end">
         <AdminSidebar page="students" />
-        <div className="w-[calc(100%-300px)]">
+        <div className="lg:w-[calc(100%-300px)] w-full">
           <AdminNavbar page="Students" />
           <StudentsTable />
         </div>

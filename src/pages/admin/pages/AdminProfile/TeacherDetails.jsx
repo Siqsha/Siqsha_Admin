@@ -8,7 +8,7 @@ function TeacherDetails() {
     <>
       <div className="!flex bg-gray1 justify-end">
         <AdminSidebar page="teachers" />
-        <div className="w-[calc(100%-300px)] h-screen">
+        <div className="lg:w-[calc(100%-300px)] w-full h-screen">
           <AdminNavbar page="Teachers" />
           <TeachersTable />
         </div>
