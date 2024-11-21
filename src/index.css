@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+* {
+  font-family: "Roboto", sans-serif;
+}
+.headerlink ul li {
+  margin: 0 !important;
+}
+.slick-slider .slick-list {
+  padding-bottom: 70px !important;
+}
+/* .slick-prev {
+  position: relative;
+  padding-left: 25px;
+  left: -46px !important;
+  width: 47px;
+  height: 47px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.slick-prev::before {
+  content: url("assets/Images/Left.png") !important;
+  display: inline-block;
+  background-size: contain;
+  background-repeat: no-repeat;
+  transform: translateY(-50%);
+  background-color: #002060;
+  border-radius: 50%;
+  width: 47px;
+  height: 47px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1 !important;
+}
+.slick-next {
+  position: relative;
+  padding-left: 25px;
+  right: -50px !important;
+}
+.slick-next::before {
+  content: url("assets/Images/Left.png") !important;
+  display: inline-block;
+  background-size: contain;
+  background-repeat: no-repeat;
+  transform: translateY(-50%);
+  background-color: #002060;
+  border-radius: 50%;
+  width: 47px;
+  height: 47px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: rotate(180deg);
+  opacity: 1 !important;
+} */
+.footerbg {
+  background-image: url("./assets/Images/Footer.png");
+}
+@media (max-width: 1024px) {
+  .footerbg {
+    background-color: #002060;
+    background-image: none;
+  }
+}
+.slick-list {
+  margin: 0 -15px;
+}
+.slick-slide > div {
+  padding: 0 15px;
+}
+.slick-next:before,
+.slick-prev:before {
+  color: #002060 !important;
+}
