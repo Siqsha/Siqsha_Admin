@@ -6,7 +6,7 @@ import ApprovalPage from "../../components/AprrovalPage";
 function ApprovalDetails() {
   return (
     <>
-      <div className="!flex bg-gray1 justify-end">
+      <div className="!flex justify-end">
         <AdminSidebar page="approval" />
         <div className="lg:!w-[calc(100%-300px)] w-full">
           <AdminNavbar page="Approval" />

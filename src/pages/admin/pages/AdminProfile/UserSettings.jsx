@@ -5,7 +5,7 @@ import AdminNavbar from "../../components/AdminNavbar";
 function UserSettings() {
   return (
     <>
-      <div className="flex bg-gray1">
+      <div className="flex">
         <AdminSidebar page="usersetting" />
         <div className="w-full">
           <AdminNavbar page="User Settings" />

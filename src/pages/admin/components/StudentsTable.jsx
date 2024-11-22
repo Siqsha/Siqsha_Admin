@@ -135,8 +135,9 @@ const StudentsTable = () => {
                 <td className="py-3 px-6 text-left">{user.role}</td>
                 <td className="py-3 px-6 text-left">
                   <span
-                    className={`${user.isOnline ? "text-green-500" : "text-red"
-                      }`}
+                    className={`${
+                      user.isOnline ? "text-green-500" : "text-red"
+                    }`}
                   >
                     {user.isOnline === true ? "Active" : "Inactive"}
                   </span>

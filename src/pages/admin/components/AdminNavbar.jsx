@@ -6,49 +6,24 @@ import { IoNotificationsOutline } from "react-icons/io5";
 import { PiSignOutBold } from "react-icons/pi";
 import LOGOMOBILE from "../../../assets/Images/LogoMobile.png";
 import { CgMenu } from "react-icons/cg";
-import { Link, useNavigate, } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-import {
-  Dialog,
-  DialogPanel,
-
-} from "@headlessui/react";
+import { Dialog, DialogPanel } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { CgAddR } from "react-icons/cg";
 
 import { MdOutlineSpaceDashboard } from "react-icons/md";
 
 function AdminNavbar({ page }) {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  //   try {
-  //     const data = await getStudentProfile();
-  //     if (data && Object.keys(data).length > 0) {
-  //       const profileData = data.user;
-  //       setUserName(profileData.firstName + " " + profileData.lastName);
-  //       if (profileData.profileImageUrl) {
-  //         setPreview(profileData.profileImageUrl);
-  //       }  
-  //       dispatch(updateStudentProfile(profileData));
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
 
   const handleLogoutUser = () => {
     localStorage.clear();
-    navigate("/login");
+    navigate("/");
   };
 
-  // useEffect(() => {
-  //   getProfileFormData();
-  // }, []);
-
   return (
-
-
     <div>
       <header className=" top-0 left-0 w-full z-10 bg-gray1">
         <Dialog
@@ -69,20 +44,18 @@ function AdminNavbar({ page }) {
                         className="-m-2.5 rounded-md p-2.5 text-gray-700"
                       >
                         <span className="sr-only">Close menu</span>
-                        <XMarkIcon
-                          aria-hidden="true"
-                          className="size-6"
-                        />
+                        <XMarkIcon aria-hidden="true" className="size-6" />
                       </button>
                     </div>
 
                     <ul className="text-gray-500 font-semibold flex flex-col gap-2">
                       <Link
                         to="/admin/dashboard"
-                        className={`rounded-[8px] p-[17px] group hover:bg-primary ${page === "dashboard"
-                          ? "bg-primary text-white"
-                          : "bg-white text-nevyblue"
-                          }`}
+                        className={`rounded-[8px] p-[17px] group hover:bg-primary ${
+                          page === "dashboard"
+                            ? "bg-primary text-white"
+                            : "bg-white text-nevyblue"
+                        }`}
                       >
                         <Link to="/admin/dashboard" className="">
                           <div className="flex items-center gap-[15px] hover:text-white">
@@ -96,10 +69,11 @@ function AdminNavbar({ page }) {
 
                       <Link
                         to="/admin/user-settings"
-                        className={`rounded-[8px] p-[17px] group hover:bg-primary ${page === "usersetting"
-                          ? "bg-primary text-white"
-                          : "bg-white text-nevyblue"
-                          }`}
+                        className={`rounded-[8px] p-[17px] group hover:bg-primary ${
+                          page === "usersetting"
+                            ? "bg-primary text-white"
+                            : "bg-white text-nevyblue"
+                        }`}
                       >
                         <Link to="/admin/user-settings" className="">
                           <div className="flex items-center gap-[15px] hover:text-white">
@@ -111,10 +85,11 @@ function AdminNavbar({ page }) {
                         </Link>
                       </Link>
                       <Link
-                        className={`rounded-[8px] p-[17px] group hover:bg-primary ${page === "students"
-                          ? "bg-primary text-white"
-                          : "bg-white text-nevyblue"
-                          }`}
+                        className={`rounded-[8px] p-[17px] group hover:bg-primary ${
+                          page === "students"
+                            ? "bg-primary text-white"
+                            : "bg-white text-nevyblue"
+                        }`}
                       >
                         <Link to="/admin/students" className="">
                           <div className="flex items-center gap-[15px] hover:text-white">
@@ -127,10 +102,11 @@ function AdminNavbar({ page }) {
                       </Link>
                       <Link
                         to="/admin/teachers"
-                        className={`rounded-[8px] p-[17px] group hover:bg-primary ${page === "teachers"
-                          ? "bg-primary text-white"
-                          : "bg-white text-nevyblue"
-                          }`}
+                        className={`rounded-[8px] p-[17px] group hover:bg-primary ${
+                          page === "teachers"
+                            ? "bg-primary text-white"
+                            : "bg-white text-nevyblue"
+                        }`}
                       >
                         <Link to="/admin/teachers" className="">
                           <div className="flex items-center gap-[15px] hover:text-white">
@@ -143,10 +119,11 @@ function AdminNavbar({ page }) {
                       </Link>
                       <Link
                         to="/admin/approval"
-                        className={`rounded-[8px] p-[17px] group hover:bg-primary ${page === "approval"
-                          ? "bg-primary text-white"
-                          : "bg-white text-nevyblue"
-                          }`}
+                        className={`rounded-[8px] p-[17px] group hover:bg-primary ${
+                          page === "approval"
+                            ? "bg-primary text-white"
+                            : "bg-white text-nevyblue"
+                        }`}
                       >
                         <Link to="/admin/approval" className="">
                           <div className="flex items-center gap-[15px] hover:text-white">
@@ -198,12 +175,11 @@ function AdminNavbar({ page }) {
               </span>
             </div>
           </div>
-          <div className="relative">
-
+          {/* <div className="relative">
             <div className="bg-gray w-[50px] h-[50px] rounded-full flex justify-center items-center">
               <img src={PROFILE} alt="" />
             </div>
-          </div>
+          </div> */}
           <div className="lg:block hidden">
             <button
               onClick={handleLogoutUser}
@@ -223,8 +199,6 @@ function AdminNavbar({ page }) {
               <CgMenu aria-hidden="true" className="size-6" />
             </button>
           </div>
-
-
         </div>
       </header>
     </div>

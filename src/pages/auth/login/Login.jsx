@@ -98,16 +98,16 @@ function Login() {
   };
 
   return (
-    <div className="md:flex h-full min-h-screen bg-gray1">
+    <div className="md:flex h-full min-h-screen ">
       <CommonPart text={text} />
-      <div className="md:mx-auto py-[50px] px-[27px] md:w-1/2 h-screen overflow-auto">
+      <div className="flex md:mx-auto py-[50px] px-[27px] md:w-1/2 h-screen overflow-auto">
         <div className="flex justify-center items-center  lg:max-w-[450px] xl:max-w-[642px] w-full m-auto ">
           <div className="w-full bg-white shadow-[0px_0px_12px_#5c5ca133]">
             <div className="px-[20px] md:px-[20px] lg:px-[26px] xl:px-[56px] py-[34px]">
               <h1 className="sm:text-[38px] text-[26px] font-bold text-center pb-[18px]">
                 Welcome
               </h1>
-              <div className="border-primary border-[2px] flex justify-center items-center w-full gap-[10px]">
+              {/* <div className="border-primary border-[2px] flex justify-center items-center w-full gap-[10px]">
                 <img src={google} alt="" className="w-[42px] h-[42px]" />
                 <button
                   onClick={googleLogin}
@@ -115,7 +115,7 @@ function Login() {
                 >
                   Login with Google
                 </button>
-              </div>
+              </div> */}
 
               <Formik
                 initialValues={initialValues}
@@ -124,11 +124,11 @@ function Login() {
               >
                 {({ isSubmitting, resetForm }) => (
                   <Form>
-                    <div className="flex items-center my-4 gap-2">
+                    <div className="flex items-center my-4 ">
                       <div className="flex-grow border-t border-gray-300"></div>
-                      <span className="text-[10px] xl:text-[16px] text-gray1 font-medium text-center mt-[0px]">
+                      {/* <span className="text-[10px] xl:text-[16px] text-gray1 font-medium text-center mt-[0px]">
                         OR LOGIN WITH EMAIL
-                      </span>
+                      </span> */}
                       <div className="flex-grow border-t border-gray-300"></div>
                     </div>
                     <div className="pt-[18px]">
@@ -153,7 +153,7 @@ function Login() {
                       />
                     </div>
 
-                    <div className="pt-[38px] flex items-center justify-between w-full gap-[5px]">
+                    {/* <div className="pt-[38px] flex items-center justify-between w-full gap-[5px]">
                       <div className="flex items-center gap-[10px]">
                         <input
                           type="checkbox"
@@ -163,10 +163,7 @@ function Login() {
                           Remember me
                         </p>
                       </div>
-                      <p className="text-red text-[12px] md:text-[16px] whitespace-nowrap">
-                        <Link to="/forgot-password">Forgot Password ?</Link>
-                      </p>
-                    </div>
+                    </div> */}
 
                     <div className="md:pt-[59.22px] pt-[27px]">
                       <Button
@@ -176,18 +173,11 @@ function Login() {
                         className="bg-primary text-white hover:bg-[#466cb7] w-full"
                       />
                     </div>
-                    <div className="pt-[19.78px]">
-                      <Button
-                        onClick={() => resetForm()}
-                        text="Cancel"
-                        className="border-primary border-[2px] text-primary w-full"
-                      />
-                    </div>
                   </Form>
                 )}
               </Formik>
 
-              <div className="pt-[33px] text-center">
+              {/* <div className="pt-[33px] text-center">
                 <p className="text-[14px] md:text-[16px] lg:text-[18px] text-gray1 pb-[8px]">
                   New user?
                   <span className="text-[14px] md:text-[16px] lg:text-[18px] text-primary">
@@ -203,7 +193,7 @@ function Login() {
                     </Link>
                   </span>
                 </p>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
