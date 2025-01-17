@@ -12,6 +12,7 @@ import {
   updateLanguage,
 } from "../../pages/services/apis/languageApi";
 import { useDispatch } from "react-redux";
+import { RiDeleteBin5Line } from "react-icons/ri";
 
 function AddLanguageModal({ open, setOpen, language = {} }) {
   const dispatch = useDispatch();
@@ -38,7 +39,6 @@ function AddLanguageModal({ open, setOpen, language = {} }) {
         );
       } else {
         data = await dispatch(addLanguage({ languages: values.languages }));
-        console.log("data", data);
       }
       showMessageModal(data);
       setOpen(false);
@@ -57,7 +57,7 @@ function AddLanguageModal({ open, setOpen, language = {} }) {
           <div>
             <DialogTitle
               as="h3"
-              className={`text-[22px] font-bold text-primary mb-[32px] text-center`}
+              className={`text-[22px] font-bold text-primary text-center`}
             >
               {!language?.language ? "Add Language" : "Update Language"}
             </DialogTitle>
@@ -81,7 +81,10 @@ function AddLanguageModal({ open, setOpen, language = {} }) {
                       {values.languages &&
                         values.languages.length > 0 &&
                         values.languages.map((language, index) => (
-                          <div key={index} className="pt-[18px]">
+                          <div
+                            key={index}
+                            className="pt-[18px] flex items-center gap-4"
+                          >
                             <TextInput
                               name={`languages[${index}]`}
                               type="text"
@@ -92,10 +95,10 @@ function AddLanguageModal({ open, setOpen, language = {} }) {
                             {values.languages.length > 1 && (
                               <button
                                 type="button"
-                                className="text-red-600 ml-2"
+                                className="text-red bg-white border-red border-2 w-[46px] h-[46px] rounded-md flex justify-center items-center mt-[5px]"
                                 onClick={() => arrayHelpers.remove(index)}
                               >
-                                Delete
+                                <RiDeleteBin5Line className="text-red text-2xl" />
                               </button>
                             )}
                           </div>
@@ -114,7 +117,7 @@ function AddLanguageModal({ open, setOpen, language = {} }) {
                     </div>
                   )}
                 />
-                <div className="md:pt-[59.22px] pt-[27px]">
+                <div className="pt-[20px]">
                   <Button
                     type="submit"
                     disabled={isSubmitting}

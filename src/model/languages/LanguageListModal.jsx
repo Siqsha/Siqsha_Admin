@@ -13,6 +13,7 @@ import { useMessageModal } from "../../contexts/MessageModalContext";
 import Button from "../../components/common/Button";
 import { useModal } from "../../contexts/ModalContext";
 import { useSelector, useDispatch } from "react-redux";
+import LanguagesSkeleton from "../../components/skeleton/LanguagesSkeleton";
 
 function LanguageListModal({ open, setOpen }) {
   const { openModal } = useModal();
@@ -61,7 +62,7 @@ function LanguageListModal({ open, setOpen }) {
             <div>
               <Button
                 onClick={handleAddLanguage}
-                className="bg-primary border-[2px] text-white sm:px-[20px] flex justify-self-end px-[16px]"
+                className="bg-primary border-[2px] text-white sm:px-[20px] flex justify-self-end items-center px-[16px]"
                 text={"Add Langauge"}
               />
             </div>
@@ -76,6 +77,7 @@ function LanguageListModal({ open, setOpen }) {
             <IoMdClose className="text-3xl" />
           </button>
         </div>
+        {loading && <LanguagesSkeleton />}
         <div className="sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
             <div className="flex flex-col divide-y divide-gray-300">
@@ -85,11 +87,7 @@ function LanguageListModal({ open, setOpen }) {
                   <span className="sr-only">Edit</span>
                 </div>
               </div>
-              <div
-                className="flex flex-col max-h-[500px] overflow-auto"
-                style={{ marginLeft: "17px" }}
-              >
-                {loading && <p>Loading...</p>}
+              <div className="flex flex-col max-h-[500px] overflow-auto my-scroll px-3">
                 {!loading &&
                   languages?.map((lang) => (
                     <div

@@ -11,9 +11,7 @@ const CommonLayout = ({ title, children }) => {
           <Navbar />
           <div className="md:p-[34px_45px] sm:p-[25px_35px] p-[16px] h-[calc(100%-280px)]">
             {title && (
-              <h1 className="text-[30px] font-medium text-nevyblue mb-[16px]">
-                {title}
-              </h1>
+              <h1 className="text-[30px] font-medium text-nevyblue">{title}</h1>
             )}
             {children}
           </div>

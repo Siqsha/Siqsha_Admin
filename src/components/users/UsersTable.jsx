@@ -1,6 +1,7 @@
 import React from "react";
 import dayjs from "dayjs";
 import UserImage from "../../assets/Images/UserImage.png";
+import UserTableSkeleton from "../skeleton/UserTableSkeleton";
 
 function UsersTable({ users, loading, pagination, onPageChange }) {
   const handlePageChange = (newPage) => {
@@ -10,7 +11,7 @@ function UsersTable({ users, loading, pagination, onPageChange }) {
   };
   return (
     <div className="px-4 sm:px-6 lg:px-8">
-      {loading && <p>Loading....</p>}
+      {loading && <UserTableSkeleton />}
       {!loading && (
         <div>
           <div className="mt-8 flow-root">

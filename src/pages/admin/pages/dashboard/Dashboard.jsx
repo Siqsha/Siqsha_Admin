@@ -8,7 +8,7 @@ function Dashboard() {
   return (
     <>
       <CommonLayout title={"Dashboard"}>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           <div
             className="bg-blue-500 p-8 text-white shadow-md flex gap-2 items-center justify-center cursor-pointer hover:bg-blue-600 transition"
             onClick={() => openModal("ManageLanguages")}
@@ -27,7 +27,6 @@ function Dashboard() {
             </div>
             <h3 className="text-xl">Manage Categories</h3>
           </div>
-          {/* Add more boxes as needed */}
         </div>
       </CommonLayout>
     </>
