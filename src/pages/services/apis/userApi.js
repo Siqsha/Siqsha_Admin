@@ -10,7 +10,6 @@ export const getAllUsers = (role, forceRefresh, page) => {
         dispatch(fetchUsersRequest());
         try {
             const data = await handleApiRequest("GET", `/user-data/${role}?page=${page}&limit=${10}`);
-            console.log('data', data)
             dispatch(fetchUsersSuccess({ user: data.data, pagination: data.pagination }));
         } catch (error) {
             dispatch(fetchUsersFailure(error.message));

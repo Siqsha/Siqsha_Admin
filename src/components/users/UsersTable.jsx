@@ -81,7 +81,11 @@ function UsersTable({ users, loading, pagination, onPageChange }) {
                           </div>
                         </td>
                         <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500 capitalize">
-                          {user.accountStatus || "active"}
+                          {user.accountStatus === "active"
+                            ? user.accountStatus
+                            : user.accountStatus === "deactive"
+                            ? "inactive"
+                            : "" || "active"}
                         </td>
                         <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500 capitalize">
                           {dayjs(user.createdAt).format("DD MMM YYYY")}

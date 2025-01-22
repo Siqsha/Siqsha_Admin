@@ -58,17 +58,15 @@ function LanguageListModal({ open, setOpen }) {
     <CommonDialog open={open} setOpen={setOpen}>
       <div className="bg-white sm:p-[16px] p-[24px]">
         <div className="flex justify-between items-center pb-5">
-          <div className="flex gap-16 items-center">
-            <div>
-              <Button
-                onClick={handleAddLanguage}
-                className="bg-primary border-[2px] text-white sm:px-[20px] flex justify-self-end items-center px-[16px]"
-                text={"Add Langauge"}
-              />
-            </div>
+          <div className="flex-wrap-reverse sm:flex gap-16 items-center">
+            <Button
+              onClick={handleAddLanguage}
+              className="bg-primary border-[2px] text-white sm:px-[20px]  flex justify-self-end items-center px-[px] sm:mr-0 mr-[42px]"
+              text={"Add Language"}
+            />
             <DialogTitle
               as="h3"
-              className={`text-[22px] font-bold text-primary flex-grow text-center`}
+              className={`sm:text-[22px] text-[20px] sm:mt-0 mt-3 font-bold text-primary flex-grow text-center`}
             >
               Manage Languages
             </DialogTitle>

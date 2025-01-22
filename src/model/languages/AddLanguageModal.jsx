@@ -13,6 +13,7 @@ import {
 } from "../../pages/services/apis/languageApi";
 import { useDispatch } from "react-redux";
 import { RiDeleteBin5Line } from "react-icons/ri";
+import { FaPlus } from "react-icons/fa";
 
 function AddLanguageModal({ open, setOpen, language = {} }) {
   const dispatch = useDispatch();
@@ -20,6 +21,8 @@ function AddLanguageModal({ open, setOpen, language = {} }) {
   const [initialValues, setInitialValues] = useState({
     languages: language?.language?.name ? [language.language.name] : [""],
   });
+
+  console.log("language", language);
 
   useEffect(() => {
     if (language?.language?.name) {
@@ -80,10 +83,10 @@ function AddLanguageModal({ open, setOpen, language = {} }) {
                     <div>
                       {values.languages &&
                         values.languages.length > 0 &&
-                        values.languages.map((language, index) => (
+                        values.languages.map((lang, index) => (
                           <div
                             key={index}
-                            className="pt-[18px] flex items-center gap-4"
+                            className="pt-[18px] flex items-center gap-2"
                           >
                             <TextInput
                               name={`languages[${index}]`}
@@ -92,28 +95,30 @@ function AddLanguageModal({ open, setOpen, language = {} }) {
                               className="input-field"
                               component={TextInput}
                             />
-                            {values.languages.length > 1 && (
-                              <button
-                                type="button"
-                                className="text-red bg-white border-red border-2 w-[46px] h-[46px] rounded-md flex justify-center items-center mt-[5px]"
-                                onClick={() => arrayHelpers.remove(index)}
-                              >
-                                <RiDeleteBin5Line className="text-red text-2xl" />
-                              </button>
-                            )}
+                            <div className="flex justify-center items-center">
+                              {index === values.languages.length - 1 &&
+                                !language?.language?.name && (
+                                  <button
+                                    type="button"
+                                    onClick={() => arrayHelpers.push("")}
+                                    className="font-medium text-primary w-[42px] h-[42px] border-2 border-[#002060] rounded-md flex justify-center items-center gap-[10px]"
+                                  >
+                                    <FaPlus className="text-[20px] w-[20px] h-[20px]" />
+                                  </button>
+                                )}
+                            </div>
+                            {values.languages.length > 1 &&
+                              !language?.language?.name && (
+                                <button
+                                  type="button"
+                                  className="font-medium text-red w-[47px] h-[42px] border-2 border-red rounded-md flex justify-center items-center gap-[10px]"
+                                  onClick={() => arrayHelpers.remove(index)}
+                                >
+                                  <RiDeleteBin5Line className="text-red text-2xl" />
+                                </button>
+                              )}
                           </div>
                         ))}
-
-                      {!language?.language && (
-                        <div className="md:pt-[59.22px] pt-[27px]">
-                          <Button
-                            type="button"
-                            onClick={() => arrayHelpers.push("")}
-                            text="Add Language"
-                            className="bg-primary text-white hover:bg-[#466cb7] w-full"
-                          />
-                        </div>
-                      )}
                     </div>
                   )}
                 />

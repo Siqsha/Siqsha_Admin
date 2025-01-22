@@ -62,7 +62,7 @@ function AddCategoryModal({ open, setOpen, category = {} }) {
 
   return (
     <CommonDialog open={open} setOpen={setOpen}>
-      <div className="bg-white sm:p-[16px] p-[24px]">
+      <div className="bg-white sm:p-[16px] p-[24px] ">
         <div className="flex justify-between items-start">
           <div>
             <DialogTitle
@@ -71,12 +71,12 @@ function AddCategoryModal({ open, setOpen, category = {} }) {
             >
               {category?.category ? "Edit Category" : "Add Category"}
             </DialogTitle>
+            <button onClick={() => setOpen(false)}>
+              <IoMdClose className="text-3xl" />
+            </button>
           </div>
-          <button onClick={() => setOpen(false)}>
-            <IoMdClose className="text-3xl" />
-          </button>
         </div>
-        <div className="p-4">
+        <div className="sm:p-4 h-full max-h-[632px] overflow-auto my-scroll">
           <Formik
             initialValues={initialValues}
             onSubmit={handleSubmit}
@@ -91,8 +91,8 @@ function AddCategoryModal({ open, setOpen, category = {} }) {
                       <div className="px-[15px]">
                         {values.categories.map((category, index) => (
                           <div key={index}>
-                            <div className="mt-5">
-                              <div className="flex justify-end items-center border-b-2 border-gray pb-2 mb-2">
+                            <div>
+                              <div className="flex justify-end items-center  mb-2">
                                 <div className="flex justify-center items-start">
                                   <div className="flex justify-end gap-3 items-center">
                                     {values.categories.length > 1 && (
@@ -172,12 +172,14 @@ function AddCategoryModal({ open, setOpen, category = {} }) {
                       </div>
                     )}
                   </FieldArray>
-                  <Button
-                    type="submit"
-                    disabled={isSubmitting}
-                    text={category?.category ? "Update" : "Add"}
-                    className="bg-primary text-white hover:bg-[#466cb7] sm:px-[28px] px-[16px]"
-                  />
+                  <div>
+                    <Button
+                      type="submit"
+                      disabled={isSubmitting}
+                      text={category?.category ? "Update" : "Add"}
+                      className="bg-primary text-white hover:bg-[#466cb7] sm:px-[28px] px-[16px] mt-4 ml-[16px]"
+                    />
+                  </div>
                 </Form>
               );
             }}

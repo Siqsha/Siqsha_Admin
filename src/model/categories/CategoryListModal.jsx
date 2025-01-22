@@ -76,7 +76,7 @@ const CategoryListModal = ({ open, setOpen }) => {
     <CommonDialog open={open} setOpen={setOpen}>
       <div className="bg-white sm:p-[16px] p-[24px]">
         <div className="flex justify-between items-center mb-10">
-          <div className="flex gap-16 items-center">
+          <div className="flex-wrap-reverse sm:flex gap-16 items-center">
             <div>
               <Button
                 onClick={() => openModal("AddCategoryModel")}
@@ -86,7 +86,7 @@ const CategoryListModal = ({ open, setOpen }) => {
             </div>
             <DialogTitle
               as="h3"
-              className={`text-[22px] font-bold text-primary text-center`}
+              className={`text-[22px] font-bold text-primary text-center sm:mt-0 mt-4`}
             >
               Manage Category
             </DialogTitle>
@@ -95,7 +95,7 @@ const CategoryListModal = ({ open, setOpen }) => {
             <IoMdClose className="text-3xl" />
           </button>
         </div>
-        <div className="mb-8">
+        <div className="mb-8 h-full max-h-[632px] overflow-auto my-scroll">
           <div className="mb-6 flex space-x-6 ">
             <button
               onClick={() => handleTabChange("all")}
@@ -176,7 +176,7 @@ const CategoryListModal = ({ open, setOpen }) => {
                       {category.subcategories.map((sub, index) => (
                         <li
                           key={index}
-                          className="text-gray-700 flex items-start space-x-2 font-medium"
+                          className="text-gray-700 flex items-start space-x-2 border-b font-medium hover:bg-lightblue py-3 pl-4"
                         >
                           <span className="capitalize">{sub}</span>
                         </li>

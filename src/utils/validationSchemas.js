@@ -6,11 +6,15 @@ export const languageValidationSchema = Yup.object().shape({
         .min(1, "At least one language is required"),
 })
 
-export const categoryValidationSchema = Yup.array().of(
-    Yup.object().shape({
-        category: Yup.string().required("Category is required"),
-        subcategories: Yup.array().of(
-            Yup.string().required("Subcategory is required")
-        ),
-    })
-);
+export const categoryValidationSchema = Yup.object().shape({
+    categories: Yup.array()
+        .of(
+            Yup.object().shape({
+                category: Yup.string().required("Category is required"),
+                subcategories: Yup.array()
+                    .of(Yup.string().required("Subcategory is required"))
+                    .min(1, "At least one subcategory is required"),
+            })
+        )
+        .min(1, "At least one category is required"),
+});
