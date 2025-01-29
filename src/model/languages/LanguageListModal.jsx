@@ -56,25 +56,21 @@ function LanguageListModal({ open, setOpen }) {
 
   return (
     <CommonDialog open={open} setOpen={setOpen}>
-      <div className="bg-white sm:p-[16px] p-[24px]">
-        <div className="flex justify-between items-center pb-5">
-          <div className="flex-wrap-reverse sm:flex gap-16 items-center">
-            <Button
-              onClick={handleAddLanguage}
-              className="bg-primary border-[2px] text-white sm:px-[20px]  flex justify-self-end items-center px-[px] sm:mr-0 mr-[42px]"
-              text={"Add Language"}
-            />
+      <div className="bg-white p-[10px] md:p-[24px]">
+        <div className="flex justify-between items-center pb-1">
+          <div className="flex justify-center items-center flex-grow">
             <DialogTitle
               as="h3"
-              className={`sm:text-[22px] text-[20px] sm:mt-0 mt-3 font-bold text-primary flex-grow text-center`}
+              className="sm:text-[22px] text-[20px] font-bold text-primary text-center mx-auto"
             >
               Manage Languages
             </DialogTitle>
           </div>
           <button onClick={() => setOpen(false)}>
-            <IoMdClose className="text-3xl" />
+            <IoMdClose className="sm:text-3xl text-2xl" />
           </button>
         </div>
+
         {loading && <LanguagesSkeleton />}
         <div className="sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
@@ -85,30 +81,30 @@ function LanguageListModal({ open, setOpen }) {
                   <span className="sr-only">Edit</span>
                 </div>
               </div>
-              <div className="flex flex-col max-h-[500px] overflow-auto my-scroll px-3">
+              <div className="flex flex-col max-h-[470px] overflow-auto my-scroll px-3">
                 {!loading &&
                   languages?.map((lang) => (
                     <div
                       key={lang._id}
-                      className="flex justify-between items-center py-4"
+                      className="flex justify-between items-center py-2 gap-3 border-b-slate-300 pb-4 border-b-[1px]"
                     >
-                      <div className="flex-1 pl-4 pr-3 text-lg font-medium text-gray-900 sm:pl-0">
+                      <div className="flex-1 sm:text-lg text-sm font-medium text-gray-900">
                         {lang.name}
                       </div>
                       <div className="flex justify-center items-center gap-2">
                         <button
                           onClick={() => handleDelete(lang._id)}
                           type="button"
-                          className="text-red bg-white border-red border-2 w-[38px] h-[38px] rounded-md flex justify-center items-center"
+                          className="text-red bg-white border-red border-2 sm:w-[38px] w-[30px] sm:h-[38px] h-[30px] rounded-md flex justify-center items-center"
                         >
-                          <RiDeleteBinLine className="text-[20px] w-[20px] h-[20px]" />
+                          <RiDeleteBinLine className="sm:text-[20px] text-[18px] " />
                         </button>
                         <button
                           onClick={() => handleEdit(lang)}
                           type="button"
-                          className="font-medium text-primary w-[38px] h-[38px] border-2 border-[#002060] rounded-md flex justify-center items-center gap-[10px]"
+                          className="font-medium text-primary sm:w-[38px] w-[30px] sm:h-[38px] h-[30px] border-2 border-[#002060] rounded-md flex justify-center items-center gap-[10px]"
                         >
-                          <FaRegEdit className="text-[20px] w-[20px] h-[20px]" />
+                          <FaRegEdit className="sm:text-[20px] text-[18px]" />
                         </button>
                       </div>
                     </div>

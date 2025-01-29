@@ -21,7 +21,9 @@ export const addCategories = (formData) => {
     return async (dispatch) => {
         try {
             const data = await handleApiRequest("POST", "/setup-category", formData);
-            dispatch(getAllCategories("active", true));
+            if (data.success) {
+                dispatch(getAllCategories("approved", true));
+            }
             return data;
         } catch (error) {
             console.error("Error adding category:", error);
@@ -33,7 +35,9 @@ export const updateCategory = (id, formData) => {
     return async (dispatch) => {
         try {
             const data = await handleApiRequest("PUT", `/update-category/${id}`, formData);
-            dispatch(getAllCategories("active", true));
+            if (data.success) {
+                dispatch(getAllCategories("approved", true));
+            }
             return data;
         } catch (error) {
             console.error("Error updating category:", error);
@@ -45,7 +49,9 @@ export const deleteCategory = (id) => {
     return async (dispatch) => {
         try {
             const data = await handleApiRequest("DELETE", `/delete-category/${id}`);
-            dispatch(getAllCategories("active", true));
+            if (data.success) {
+                dispatch(getAllCategories("approved", true));
+            }
             return data;
         } catch (error) {
             console.error("Error deleting category:", error);
@@ -57,7 +63,9 @@ export const approveCategory = (id) => {
     return async (dispatch) => {
         try {
             const data = await handleApiRequest("PUT", `/approve-category/${id}`);
-            dispatch(getAllCategories("active", true));
+            if (data.success) {
+                dispatch(getAllCategories("approved", true));
+            }
             return data;
         } catch (error) {
             console.error("Error approving category:", error);

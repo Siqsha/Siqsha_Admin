@@ -22,37 +22,37 @@ function UsersTable({ users, loading, pagination, onPageChange }) {
                     <tr>
                       <th
                         scope="col"
-                        className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
+                        className="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0 whitespace-nowrap"
                       >
                         Name
                       </th>
                       <th
                         scope="col"
-                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                        className="px-3 py-3.5 text-center text-sm font-semibold text-gray-900 whitespace-nowrap"
                       >
                         Email
                       </th>
                       <th
                         scope="col"
-                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                        className="px-3 py-3.5 text-center text-sm font-semibold text-gray-900 whitespace-nowrap"
                       >
                         Availability
                       </th>
                       <th
                         scope="col"
-                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                        className="px-3 py-3.5 text-center text-sm font-semibold text-gray-900 whitespace-nowrap"
                       >
                         Account Status
                       </th>
                       <th
                         scope="col"
-                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                        className="px-3 py-3.5 text-center text-sm font-semibold text-gray-900 whitespace-nowrap"
                       >
                         Member Since
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-200 bg-white">
+                  <tbody className="divide-y divide-gray-200 bg-white text-center">
                     {users?.map((user) => (
                       <tr key={user.email}>
                         <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
@@ -97,11 +97,11 @@ function UsersTable({ users, loading, pagination, onPageChange }) {
               </div>
             </div>
           </div>
-          <div className="flex items-center justify-between mt-6">
+          <div className="flex items-center justify-end gap-6 mt-6 pb-3">
             <button
               disabled={pagination.currentPage === 1}
               onClick={() => handlePageChange(pagination.currentPage - 1)}
-              className={`px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded ${
+              className={`px-4 py-2 text-sm font-medium text-white bg-primary rounded ${
                 pagination.currentPage === 1 && "opacity-50 cursor-not-allowed"
               }`}
             >
@@ -113,7 +113,7 @@ function UsersTable({ users, loading, pagination, onPageChange }) {
             <button
               disabled={pagination.currentPage === pagination.totalPages}
               onClick={() => handlePageChange(pagination.currentPage + 1)}
-              className={`px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded ${
+              className={`px-4 py-2 text-sm font-medium text-white bg-primary rounded ${
                 pagination.currentPage === pagination.totalPages &&
                 "opacity-50 cursor-not-allowed"
               }`}

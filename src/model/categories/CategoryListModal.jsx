@@ -8,7 +8,6 @@ import {
   deleteCategory,
   getAllCategories,
 } from "../../pages/services/apis/categoryApi";
-import Button from "../../components/common/Button";
 import { useModal } from "../../contexts/ModalContext";
 import { useMessageModal } from "../../contexts/MessageModalContext";
 import { useConfirmationModal } from "../../contexts/ConfirmationModalContext";
@@ -57,10 +56,6 @@ const CategoryListModal = ({ open, setOpen }) => {
           }
         } catch (error) {
           console.error("Error deleting language:", error);
-          showMessageModal({
-            success: false,
-            message: "Failed to delete the item",
-          });
         }
       }
     );
@@ -75,31 +70,24 @@ const CategoryListModal = ({ open, setOpen }) => {
   return (
     <CommonDialog open={open} setOpen={setOpen}>
       <div className="bg-white sm:p-[16px] p-[24px]">
-        <div className="flex justify-between items-center mb-10">
-          <div className="flex-wrap-reverse sm:flex gap-16 items-center">
-            <div>
-              <Button
-                onClick={() => openModal("AddCategoryModel")}
-                className="bg-primary border-[2px] text-white sm:px-[28px] px-[16px]"
-                text={"Add Category"}
-              />
-            </div>
+        <div className="flex justify-between items-center pb-4">
+          <div className="flex justify-center items-center flex-grow">
             <DialogTitle
               as="h3"
-              className={`text-[22px] font-bold text-primary text-center sm:mt-0 mt-4`}
+              className="sm:text-[22px] text-[20px] font-bold text-primary text-center mx-auto"
             >
               Manage Category
             </DialogTitle>
           </div>
           <button onClick={() => setOpen(false)}>
-            <IoMdClose className="text-3xl" />
+            <IoMdClose className="sm:text-3xl text-2xl" />
           </button>
         </div>
         <div className="mb-8 h-full max-h-[632px] overflow-auto my-scroll">
           <div className="mb-6 flex space-x-6 ">
             <button
               onClick={() => handleTabChange("all")}
-              className={`text-lg font-semibold py-2 px-4  ${
+              className={`sm:text-lg font-semibold py-2 px-4  ${
                 activeTab === "all"
                   ? "text-primary border-b-2 border-primary"
                   : "text-gray-600 hover:text-gray-800"
@@ -109,7 +97,7 @@ const CategoryListModal = ({ open, setOpen }) => {
             </button>
             <button
               onClick={() => handleTabChange("pending")}
-              className={`text-lg font-semibold py-2 px-4 ${
+              className={`sm:text-lg font-semibold py-2 px-4 ${
                 activeTab === "pending"
                   ? "text-primary border-b-2 border-primary"
                   : "text-gray-600 hover:text-gray-800"
@@ -125,7 +113,7 @@ const CategoryListModal = ({ open, setOpen }) => {
               categories.map((category) => (
                 <div key={category._id}>
                   <div
-                    className="flex items-center cursor-pointer p-4 bg-gray-100 hover:bg-gray-200 rounded-lg shadow-md transition"
+                    className="flex items-center cursor-pointer p-2 sm:p-4 bg-gray-100 hover:bg-gray-200 rounded-lg shadow-md transition"
                     onClick={() => toggleCategory(category._id)}
                   >
                     <div className="mr-4">
@@ -136,7 +124,7 @@ const CategoryListModal = ({ open, setOpen }) => {
                       )}
                     </div>
 
-                    <h2 className="text-xl font-semibold text-gray-800 capitalize flex-1">
+                    <h2 className="sm:text-xl text-base font-semibold text-gray-800 capitalize flex-1">
                       {category.category}
                     </h2>
 
@@ -145,16 +133,16 @@ const CategoryListModal = ({ open, setOpen }) => {
                         <button
                           onClick={() => handleDelete(category._id)}
                           type="button"
-                          className="text-red bg-white border-red border-2 w-[38px] h-[38px] rounded-md flex justify-center items-center"
+                          className="text-red bg-white border-red border-2 sm:w-[38px] w-[30px] sm:h-[38px] h-[30px] rounded-md flex justify-center items-center"
                         >
-                          <RiDeleteBinLine className="text-[20px] w-[20px] h-[20px]" />
+                          <RiDeleteBinLine className="sm:text-[20px] text-[18px]" />
                         </button>
                         <button
                           onClick={() => handleEdit(category)}
                           type="button"
-                          className="font-medium text-primary w-[38px] h-[38px] border-2 border-[#002060] rounded-md flex justify-center items-center gap-[10px]"
+                          className="font-medium text-primary sm:w-[38px] w-[30px] sm:h-[38px] h-[30px] border-2 border-[#002060] rounded-md flex justify-center items-center gap-[10px]"
                         >
-                          <FaRegEdit className="text-[20px] w-[20px] h-[20px]" />
+                          <FaRegEdit className="sm:text-[20px] text-[18px]" />
                         </button>
                       </div>
                     ) : (

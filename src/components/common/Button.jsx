@@ -12,7 +12,7 @@ const Button = ({
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={`h-[52px] sm:text-[20px] text-[18px] font-bold rounded-[6px] py-[6px] ${className}`}
+      className={`h-[52px] sm:text-[20px] text-[20px] font-bold rounded-[6px]  ${className}`}
     >
       {disabled ? (
         <div className="flex items-center justify-center space-x-2 opacity-90">

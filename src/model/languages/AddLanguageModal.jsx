@@ -22,8 +22,6 @@ function AddLanguageModal({ open, setOpen, language = {} }) {
     languages: language?.language?.name ? [language.language.name] : [""],
   });
 
-  console.log("language", language);
-
   useEffect(() => {
     if (language?.language?.name) {
       setInitialValues({ languages: [language.language.name] });

@@ -25,23 +25,24 @@ function Navbar() {
           onClose={setMobileMenuOpen}
           className="xl:hidden "
         >
-          <div className="fixed inset-0 z-10 bg-[#00000038]" />
-          <DialogPanel className="fixed inset-y-0 left-0 z-10 top-0 overflow-y-auto bg-white p-[20px] max-w-[250px] w-full sm:ring-1 sm:ring-gray-900/10 h-full">
+          <div className="relative">
+            <div className="flex items-center justify-end">
+              <button
+                type="button"
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-gray-700 border border-primary rounded-full p-1 fixed top-3 z-50 left-[258px]"
+              >
+                <span className="sr-only">Close menu</span>
+                <XMarkIcon aria-hidden="true" className="size-5" />
+              </button>
+            </div>
+          </div>
+          <div className="fixed inset-0 z-[40] bg-[#00000038]" />
+          <DialogPanel className="fixed inset-y-0 left-0 z-[50] top-0 overflow-y-auto bg-white p-[20px] max-w-[250px] w-full sm:ring-1 sm:ring-gray-900/10 h-full ">
             <div className="mt-6 flow-root">
               <div className="-my-6 divide-y divide-gray-500/10">
                 <div className="pb-[20px]">
-                  <div>
-                    <div className="flex items-center justify-end">
-                      <button
-                        type="button"
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="rounded-md p-2.5 text-gray-700"
-                      >
-                        <span className="sr-only">Close menu</span>
-                        <XMarkIcon aria-hidden="true" className="size-6" />
-                      </button>
-                    </div>
-
+                  <div className="flex flex-col h-[95svh] justify-between pt-7">
                     <div className="text-gray-500 font-semibold flex flex-col gap-2">
                       <NavLink
                         to="/admin/dashboard"
@@ -79,16 +80,16 @@ function Navbar() {
                         </div>
                       </NavLink>
                     </div>
-                  </div>
-                  <div className="rounded-[8px] p-[17px] group hover:bg-primary ">
-                    <Link href="#" className="">
-                      <div className="flex items-center gap-[15px] hover:text-white">
-                        <PiSignOutBold className="group-hover:text-white text-[22px]" />
-                        <h1 className="mb-0 text-nevyblue text-[16px] font-bold leading-[2%] group-hover:text-white">
-                          Sign out
-                        </h1>
-                      </div>
-                    </Link>
+                    <div className="rounded-[8px] p-[17px] group hover:bg-primary ">
+                      <Link href="#" className="">
+                        <div className="flex items-center gap-[15px] hover:text-white">
+                          <PiSignOutBold className="group-hover:text-white text-[22px]" />
+                          <h1 className="mb-0 text-nevyblue text-[16px] font-bold leading-[2%] group-hover:text-white">
+                            Sign out
+                          </h1>
+                        </div>
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
