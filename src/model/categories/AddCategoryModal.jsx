@@ -28,6 +28,20 @@ function AddCategoryModal({ open, setOpen, category = {} }) {
     ],
   });
 
+  // Function to add a new category with an empty subcategory
+  const addCategory = () => {
+    setInitialValues((prevState) => ({
+      ...prevState,
+      categories: [
+        ...prevState.categories,
+        {
+          category: "",
+          subcategories: [""],
+        },
+      ],
+    }));
+  };
+
   useEffect(() => {
     if (category?.category) {
       setInitialValues({
@@ -61,19 +75,8 @@ function AddCategoryModal({ open, setOpen, category = {} }) {
 
   return (
     <CommonDialog open={open} setOpen={setOpen}>
-      <div className="bg-white sm:p-[16px] p-[24px] ">
-        {/* <div>
-            <DialogTitle
-              as="h3"
-              className={`text-[22px] font-bold text-primary mb-[32px] text-center`}
-            >
-              {category?.category ? "Edit Category" : "Add Category"}
-            </DialogTitle>
-            <button onClick={() => setOpen(false)}>
-              <IoMdClose className="text-3xl" />
-            </button>
-          </div> */}
-        <div className="flex justify-between items-center pb-4">
+      <div className="bg-white p-[10px] sm:p-[16px] md:p-[24px] ">
+        <div className="flex justify-between items-center pb-20">
           <div className="flex justify-center items-center flex-grow">
             <DialogTitle
               as="h3"
@@ -86,7 +89,6 @@ function AddCategoryModal({ open, setOpen, category = {} }) {
             <IoMdClose className="sm:text-3xl text-2xl" />
           </button>
         </div>
-
         <div className="sm:p-4 h-full max-h-[632px] overflow-auto my-scroll">
           <Formik
             initialValues={initialValues}
@@ -99,97 +101,106 @@ function AddCategoryModal({ open, setOpen, category = {} }) {
                 <Form>
                   <FieldArray name="categories">
                     {({ push, remove }) => (
-                      <div className="px-[15px]">
-                        {values.categories.map((category, index) => (
-                          <div key={index}>
-                            <div>
-                              <div className="flex justify-end items-center  mb-2">
-                                <div className="flex justify-center items-start">
-                                  <div className="flex justify-end gap-3 items-center">
-                                    {values.categories.length > 1 && (
-                                      <button
-                                        type="button"
-                                        onClick={() => remove(index)}
-                                        className="text-red bg-white border-red border-2 w-[46px] h-[46px] rounded-md flex justify-center items-center"
-                                      >
-                                        <RiDeleteBinLine className="text-[20px]" />
-                                      </button>
-                                    )}
-                                    <button
-                                      type="button"
-                                      onClick={() =>
-                                        push({
-                                          category: "",
-                                          subcategories: [""],
-                                        })
-                                      }
-                                      className="font-medium text-primary w-[45px] h-[45px] border-2 border-[#002060] rounded-md flex justify-center items-center gap-[10px]"
-                                    >
-                                      <BiPlus className="text-[24px] w-[24px] h-[24px]" />
-                                    </button>
+                      <>
+                        <div className="absolute top-20 z-50 ml-2">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              push({
+                                category: "",
+                                subcategories: [""],
+                              });
+                            }}
+                            className="font-medium text-primary w-[90px] h-[45px] border-2 border-[#002060] rounded-md flex justify-center items-center gap-[8px] bg-white"
+                          >
+                            <BiPlus className="text-[24px] w-[24px] h-[24px]" />
+                            <span>Add</span>
+                          </button>
+                        </div>
+                        <div className="px-[8px] sm:px-[15px]">
+                          {values.categories.map((category, index) => (
+                            <div key={index}>
+                              <div>
+                                <div className="flex justify-end items-center mt-6">
+                                  <div className="flex justify-center items-start">
+                                    <div className="flex justify-end gap-3 items-center">
+                                      {values.categories.length > 1 && (
+                                        <button
+                                          type="button"
+                                          onClick={() => remove(index)}
+                                          className="text-red bg-white border-red border-2 w-[46px] h-[46px] rounded-md flex justify-center items-center"
+                                        >
+                                          <RiDeleteBinLine className="text-[20px]" />
+                                        </button>
+                                      )}
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                              <div className="flex justify-between gap-3 items-end mb-4">
-                                <div className="grid xl:grid-cols-2 grid-cols-1 sm:gap-[27px] gap-[16px] w-full">
-                                  <TextInput
-                                    label="Category"
-                                    name={`categories.${index}.category`}
-                                    placeholder="Enter Category"
-                                  />
+                                <div className="flex justify-between gap-3 items-end mb-4">
+                                  <div className="grid w-full">
+                                    <TextInput
+                                      label="Category"
+                                      name={`categories.${index}.category`}
+                                      placeholder="Enter Category"
+                                    />
+                                  </div>
                                 </div>
-                              </div>
-                              <label className="text-[16px] text-black">
-                                Subcategory
-                              </label>
-                              <FieldArray
-                                name={`categories.${index}.subcategories`}
-                              >
-                                {({ push, remove }) => (
-                                  <div className="">
-                                    {category.subcategories?.map(
-                                      (subcategory, subIndex) => (
-                                        <div key={subIndex} className="flex">
-                                          <div className="flex gap-4 w-full items-center">
-                                            <TextInput
-                                              // label={`Subcategory`}
+                                <label className="text-[16px] text-black">
+                                  Subcategory
+                                </label>
+                                <FieldArray
+                                  name={`categories.${index}.subcategories`}
+                                >
+                                  {({ push, remove }) => (
+                                    <div className="">
+                                      {category.subcategories?.map(
+                                        (subcategory, subIndex) => (
+                                          <div key={subIndex} className="flex">
+                                            <div className="flex gap-3 sm:gap-4 flex-col sm:flex-row w-full sm:items-center mb-4">
+                                              <TextInput
+                                                // label={`Subcategory`}
 
-                                              name={`categories.${index}.subcategories.${subIndex}`}
-                                              placeholder="Enter Subcategory"
-                                            />
-                                            <div className="flex gap-2 justify-end items-end mt-1">
-                                              <button
-                                                type="button"
-                                                onClick={() => push("")}
-                                                className="font-medium text-primary w-[45px] h-[45px] border-2 border-[#002060] rounded-md flex justify-center items-center gap-[10px] self-end"
-                                              >
-                                                <BiPlus className="text-[24px] w-[24px] h-[24px]" />
-                                              </button>
-
-                                              {category.subcategories.length >
-                                                1 && (
-                                                <button
-                                                  type="button"
-                                                  onClick={() =>
-                                                    remove(subIndex)
-                                                  }
-                                                  className="text-red bg-white border-red border-2 w-[45px] h-[45px]  rounded-md flex justify-center items-center self-end"
-                                                >
-                                                  <RiDeleteBinLine className="text-[20px]" />
-                                                </button>
-                                              )}
+                                                name={`categories.${index}.subcategories.${subIndex}`}
+                                                placeholder="Enter Subcategory"
+                                              />
+                                              <div className="flex gap-2 justify-end items-end mt-1 mb-4 sm:mb-0">
+                                                {subIndex ===
+                                                  category.subcategories
+                                                    .length -
+                                                    1 && (
+                                                  <button
+                                                    type="button"
+                                                    onClick={() => push("")}
+                                                    className="font-medium text-primary w-[45px] h-[45px] border-2 border-[#002060] rounded-md flex justify-center items-center gap-[10px] self-end"
+                                                  >
+                                                    <BiPlus className="text-[24px] w-[24px] h-[24px]" />
+                                                  </button>
+                                                )}
+                                                {category.subcategories.length >
+                                                  1 && (
+                                                  <button
+                                                    type="button"
+                                                    onClick={() =>
+                                                      remove(subIndex)
+                                                    }
+                                                    className="text-red bg-white border-red border-2 w-[45px] h-[45px]  rounded-md flex justify-center items-center self-end"
+                                                  >
+                                                    <RiDeleteBinLine className="text-[20px]" />
+                                                  </button>
+                                                )}
+                                              </div>
                                             </div>
                                           </div>
-                                        </div>
-                                      )
-                                    )}
-                                  </div>
-                                )}
-                              </FieldArray>
+                                        )
+                                      )}
+                                    </div>
+                                  )}
+                                </FieldArray>
+                              </div>
                             </div>
-                          </div>
-                        ))}
-                      </div>
+                          ))}
+                        </div>
+                      </>
                     )}
                   </FieldArray>
                   <div className="flex justify-center items-center">
@@ -197,7 +208,7 @@ function AddCategoryModal({ open, setOpen, category = {} }) {
                       type="submit"
                       disabled={isSubmitting}
                       text={category?.category ? "Update" : "Add"}
-                      className="bg-primary text-white hover:bg-[#466cb7] sm:px-[28px] px-[16px] mt-4 ml-[16px]"
+                      className="bg-primary text-white hover:bg-[#466cb7] sm:px-[28px] px-[16px] mt-2 ml-[16px] w-full"
                     />
                   </div>
                 </Form>
