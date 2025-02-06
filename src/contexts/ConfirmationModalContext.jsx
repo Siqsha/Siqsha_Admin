@@ -15,13 +15,25 @@ export const ConfirmationModalProvider = ({ children }) => {
     loading: false,
   });
 
+  // const showConfirmationModal = (title, onConfirm) => {
+  //   setModalState({
+  //     open: true,
+  //     title,
+  //     onConfirm,
+  //     loading: false,
+  //   });
+  // };
+
   const showConfirmationModal = (title, onConfirm) => {
-    setModalState({
+    setModalState((prev) => ({
+      ...prev,
       open: true,
       title,
-      onConfirm,
+      onConfirm: async () => {
+        await onConfirm();
+      },
       loading: false,
-    });
+    }));
   };
 
   const hideModal = () => {

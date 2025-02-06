@@ -44,18 +44,34 @@ const CategoryListModal = ({ open, setOpen }) => {
     fetchCategories(tab === "all" ? "approved" : "pending", true);
   };
 
-  const handleDelete = (catId) => {
+  const handleDelete = async (catId) => {
     showConfirmationModal(
       "Are you sure you want to delete this item?",
       async () => {
         try {
-          const data = await dispatch(deleteCategory(catId));
-          showMessageModal(data);
-          if (data.success) {
-            fetchCategories("approved", true);
+          const data = await dispatch(deleteCategory(catId, "false"));
+
+          if (data.warning) {
+            setTimeout(() => {
+              showConfirmationModal(data.message, async () => {
+                const deleteData = await dispatch(
+                  deleteCategory(catId, "true")
+                );
+                showMessageModal(deleteData);
+                if (deleteData.success) {
+                  fetchCategories("approved", true);
+                }
+              });
+            }, 200);
+          } else {
+            showMessageModal(data);
+
+            if (data.success) {
+              fetchCategories("approved", true);
+            }
           }
         } catch (error) {
-          console.error("Error deleting language:", error);
+          console.error("Error deleting category:", error);
         }
       }
     );

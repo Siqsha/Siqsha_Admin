@@ -45,10 +45,10 @@ export const updateCategory = (id, formData) => {
     };
 };
 
-export const deleteCategory = (id) => {
+export const deleteCategory = (id, confirm) => {
     return async (dispatch) => {
         try {
-            const data = await handleApiRequest("DELETE", `/delete-category/${id}`);
+            const data = await handleApiRequest("DELETE", `/delete-category/${id}?confirm=${confirm}`);
             if (data.success) {
                 dispatch(getAllCategories("approved", true));
             }
