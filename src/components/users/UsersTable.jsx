@@ -2,13 +2,66 @@ import React from "react";
 import dayjs from "dayjs";
 import UserImage from "../../assets/Images/UserImage.png";
 import UserTableSkeleton from "../skeleton/UserTableSkeleton";
+import { changeStatus } from "../../pages/services/apis/userApi";
+import { useState } from "react";
+import {  useConfirmationModal } from "../../contexts/ConfirmationModalContext";
+import { useMessageModal } from "../../contexts/MessageModalContext";
 
-function UsersTable({ users, loading, pagination, onPageChange }) {
+function UsersTable({
+  users,
+  loading,
+  pagination,
+  onPageChange,
+  updateUserLocally,
+}) {
+  const [updatingStatus, setUpdatingStatus] = useState({});
+  const { showMessageModal } = useMessageModal();
+    const { showConfirmationModal } = useConfirmationModal();
   const handlePageChange = (newPage) => {
     if (onPageChange) {
       onPageChange(newPage);
     }
   };
+
+  const handleToggleStatus = (userId, currentStatus) => {
+    showConfirmationModal(
+      `Are you sure you want to ${currentStatus === "active" ? "deactivate" : "activate"} this account?`,
+      async () => {
+        setUpdatingStatus((prev) => ({ ...prev, [userId]: true }));
+  
+        try {
+          const newStatus = currentStatus === "active" ? "deactive" : "active";
+          const response = await changeStatus(userId, { accountStatus: newStatus });
+  
+          if (response.success) {
+           
+            showMessageModal({
+              success: true,
+              message: `Account successfully ${newStatus === "active" ? "activated" : "deactivated"}.`,
+            });
+  
+            
+            updateUserLocally(userId, newStatus);
+          } else {
+            showMessageModal({
+              success: false,
+              message: "Failed to update the account status.",
+            });
+          }
+        } catch (error) {
+          console.error("Error updating status:", error);
+          showMessageModal({
+            success: false,
+            message: "An error occurred while updating the account status.",
+          });
+        } finally {
+          setUpdatingStatus((prev) => ({ ...prev, [userId]: false }));
+        }
+      }
+    );
+  };
+  
+
   return (
     <div className="px-4 sm:px-6 lg:px-8">
       {loading && <UserTableSkeleton />}
@@ -81,11 +134,31 @@ function UsersTable({ users, loading, pagination, onPageChange }) {
                           </div>
                         </td>
                         <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500 capitalize">
-                          {user.accountStatus === "active"
+                          <button
+                            onClick={() =>
+                              handleToggleStatus(user._id, user.accountStatus)
+                            }
+                            disabled={updatingStatus[user._id]}
+                            className={`px-4 py-2 text-sm font-medium rounded ${
+                              user.accountStatus === "active"
+                                ? "bg-green-500 text-white"
+                                : "bg-red text-white"
+                            } ${
+                              updatingStatus[user._id] &&
+                              "opacity-50 cursor-pointer"
+                            }`}
+                          >
+                            {updatingStatus[user._id]
+                              ? "Updating..."
+                              : user.accountStatus === "active"
+                              ? "Active"
+                              : "Inactive"}
+                          </button>
+                          {/* {user.accountStatus === "active"
                             ? user.accountStatus
                             : user.accountStatus === "deactive"
                             ? "inactive"
-                            : "" || "active"}
+                            : "" || "active"} */}
                         </td>
                         <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500 capitalize">
                           {dayjs(user.createdAt).format("DD MMM YYYY")}

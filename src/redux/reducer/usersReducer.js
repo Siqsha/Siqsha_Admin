@@ -1,4 +1,4 @@
-import { FETCH_USERS_FAILURE, FETCH_USERS_REQUEST, FETCH_USERS_SUCCESS } from "../action/action";
+import { FETCH_USERS_FAILURE, FETCH_USERS_REQUEST, FETCH_USERS_SUCCESS, UPDATE_USER_STATUS, } from "../action/action";
 
 const initialState = {
     users: [],
@@ -27,6 +27,15 @@ const usersReducer = (state = initialState, action) => {
                 ...state,
                 loading: false,
                 error: action.payload,
+            };
+        case UPDATE_USER_STATUS: // <-- Handle status update immediately
+            return {
+                ...state,
+                users: state.users.map((user) =>
+                    user._id === action.payload.userId
+                        ? { ...user, accountStatus: action.payload.newStatus }
+                        : user
+                ),
             };
         default:
             return state;

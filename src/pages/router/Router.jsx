@@ -11,6 +11,7 @@ const StudentDetails = lazy(() =>
 const TeacherDetails = lazy(() =>
   import("../admin/pages/AdminProfile/TeacherDetails")
 );
+const Adminsetting = lazy(() => import("../admin/pages/setting/Adminsetting"));
 const Dashboard = lazy(() => import("../admin/pages/dashboard/Dashboard"));
 const Users = lazy(() => import("../admin/pages/users/Users"));
 
@@ -23,7 +24,7 @@ function Router() {
           path="/"
           element={
             isAuthenticated() ? (
-              <Navigate to="/admin/dashboard" replace />
+              <Navigate to="/admin/setting" replace />
             ) : (
               <Login />
             )
@@ -35,6 +36,10 @@ function Router() {
         <Route
           path="/admin/dashboard"
           element={<ProtectedRoute element={<Dashboard />} />}
+        />
+        <Route
+          path="/admin/setting"
+          element={<ProtectedRoute element={<Adminsetting />} />}
         />
         <Route
           path="/admin/users"

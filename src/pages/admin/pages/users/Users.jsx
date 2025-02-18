@@ -5,6 +5,7 @@ import { UserTab } from "../../../../constant/dataConstant";
 import UsersTable from "../../../../components/users/UsersTable";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "../../../services/apis/userApi";
+import { updateUserStatus } from "../../../../redux/actionCreator/actionCreator";
 
 function Users() {
   const [activeTab, setActiveTab] = useState(UserTab[0]);
@@ -17,6 +18,10 @@ function Users() {
     setCurrentPage(newPage);
   };
 
+  const updateUserLocally = (userId, newStatus) => {
+    dispatch(updateUserStatus(userId, newStatus));
+  };
+
   useEffect(() => {
     const tabName = activeTab.slice(0, -1).toLowerCase();
     const forceRefresh = activeTab !== prevActiveTab || currentPage;
@@ -24,7 +29,7 @@ function Users() {
     setPrevActiveTab(activeTab);
   }, [activeTab, dispatch, prevActiveTab, currentPage]);
 
-  return (
+  return (  
     <CommonLayout title={"Users"}>
       <div className="bg-white">
         <TabGroupButton
@@ -43,6 +48,7 @@ function Users() {
                 loading={loading}
                 pagination={pagination}
                 onPageChange={handlePageChange}
+                updateUserLocally={updateUserLocally}
               />
             </div>
           )}
@@ -54,6 +60,7 @@ function Users() {
                 loading={loading}
                 pagination={pagination}
                 onPageChange={handlePageChange}
+                updateUserLocally={updateUserLocally}
               />
             </div>
           )}

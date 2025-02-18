@@ -49,6 +49,22 @@ function Sidebar() {
               </h1>
             </div>
           </NavLink>
+
+          <NavLink
+            to="/admin/setting"
+            className={({ isActive }) =>
+              `rounded-[8px] p-[17px] group hover:bg-primary ${
+                isActive ? "bg-primary text-white" : "bg-white text-nevyblue"
+              }`
+            }
+          >
+            <div className="flex items-center gap-[15px] hover:text-white">
+              <MdOutlineSpaceDashboard className="group-hover:text-white text-2xl" />
+              <h1 className="mb-0  text-[16px] font-bold leading-[2%] group-hover:text-white">
+                Setting
+              </h1>
+            </div>
+          </NavLink>
         </div>
       </aside>
     </div>

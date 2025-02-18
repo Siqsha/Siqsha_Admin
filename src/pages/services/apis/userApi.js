@@ -20,3 +20,8 @@ export const getAllUsers = (role, forceRefresh, page) => {
 export const getUserProfile = async (id) => {
     return await handleApiRequest("GET", "/get-profile/" + id, true);
 };
+
+
+export const changeStatus = async (userId, data) => {
+    return await handleApiRequest("PUT", `/change-status/${userId}`, data, true);
+};

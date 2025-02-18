@@ -10,7 +10,7 @@ export const handleApiRequest = async (method, endpoint, data = {}, useAuthInsta
             data,
         });
 
-        console.log('response', response.data)
+       
         const isSuccess = ["post", "put", "delete"].includes(method.toLowerCase());
         return { ...response.data, success: isSuccess };
     } catch (error) {
