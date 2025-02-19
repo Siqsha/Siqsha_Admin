@@ -7,6 +7,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Dialog, DialogPanel } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { MdOutlineSpaceDashboard } from "react-icons/md";
+import { IoSettingsOutline } from "react-icons/io5";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -91,7 +92,7 @@ function Navbar() {
                         }
                       >
                         <div className="flex items-center gap-[15px] hover:text-white">
-                          <MdOutlineSpaceDashboard className="group-hover:text-white" />
+                          <IoSettingsOutline className="group-hover:text-white" />
                           <h1 className="mb-0 text-[16px] font-bold leading-[2%] group-hover:text-white">
                             Setting
                           </h1>

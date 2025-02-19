@@ -3,6 +3,7 @@ import LOGO from "../../assets/Images/Logo.png";
 import { NavLink } from "react-router-dom";
 import { MdOutlineSpaceDashboard } from "react-icons/md";
 import { CgAddR } from "react-icons/cg";
+import { IoSettingsOutline } from "react-icons/io5";
 import { FaUsers } from "react-icons/fa";
 
 function Sidebar() {
@@ -59,7 +60,7 @@ function Sidebar() {
             }
           >
             <div className="flex items-center gap-[15px] hover:text-white">
-              <MdOutlineSpaceDashboard className="group-hover:text-white text-2xl" />
+              <IoSettingsOutline className="group-hover:text-white text-2xl" />
               <h1 className="mb-0  text-[16px] font-bold leading-[2%] group-hover:text-white">
                 Setting
               </h1>
