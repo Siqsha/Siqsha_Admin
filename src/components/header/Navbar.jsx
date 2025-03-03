@@ -8,6 +8,7 @@ import { Dialog, DialogPanel } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { MdOutlineSpaceDashboard } from "react-icons/md";
 import { IoSettingsOutline } from "react-icons/io5";
+import { FiUsers } from "react-icons/fi";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -77,6 +78,42 @@ function Navbar() {
                           <MdOutlineSpaceDashboard className="group-hover:text-white" />
                           <h1 className="mb-0 text-[16px] font-bold leading-[2%] group-hover:text-white">
                             Users
+                          </h1>
+                        </div>
+                      </NavLink>
+
+                      {/* <NavLink
+                        to="/admin/commission"
+                        className={({ isActive }) =>
+                          `rounded-[8px] p-[17px] group hover:bg-primary ${
+                            isActive
+                              ? "bg-primary text-white"
+                              : "bg-white text-nevyblue"
+                          }`
+                        }
+                      >
+                        <div className="flex items-center gap-[15px] hover:text-white">
+                          <IoSettingsOutline className="group-hover:text-white" />
+                          <h1 className="mb-0 text-[16px] font-bold leading-[2%] group-hover:text-white">
+                            Commission
+                          </h1>
+                        </div>
+                      </NavLink> */}
+
+                      <NavLink
+                        to="/admin/teacherlist"
+                        className={({ isActive }) =>
+                          `rounded-[8px] p-[17px] group hover:bg-primary ${
+                            isActive
+                              ? "bg-primary text-white"
+                              : "bg-white text-nevyblue"
+                          }`
+                        }
+                      >
+                        <div className="flex items-center gap-[15px] hover:text-white">
+                          <FiUsers className="group-hover:text-white" />
+                          <h1 className="mb-0 text-[16px] font-bold leading-[2%] group-hover:text-white">
+                            Teachers
                           </h1>
                         </div>
                       </NavLink>

@@ -46,3 +46,11 @@ export const getUserProfile = async (id) => {
 export const changeStatus = async (userId, data) => {
   return await handleApiRequest("PUT", `/change-status/${userId}`, data, true);
 };
+
+export const pendingTrialRequest = async () => {
+  return await handleApiRequest("GET", "/pending-trialrequest");
+}
+
+export const updateTrial = async (formData) => {
+  return await handleApiRequest("POST", "/update-action", formData);
+}

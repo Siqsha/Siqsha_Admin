@@ -12,6 +12,8 @@ const TeacherDetails = lazy(() =>
   import("../admin/pages/AdminProfile/TeacherDetails")
 );
 const Adminsetting = lazy(() => import("../admin/pages/setting/Adminsetting"));
+const Commission = lazy(() => import("../Commission/Commission"));
+const TeacherList = lazy(() => import("../Teachers/teacherList"));
 const Dashboard = lazy(() => import("../admin/pages/dashboard/Dashboard"));
 const Users = lazy(() => import("../admin/pages/users/Users"));
 
@@ -40,6 +42,14 @@ function Router() {
         <Route
           path="/admin/setting"
           element={<ProtectedRoute element={<Adminsetting />} />}
+        />
+        <Route
+          path="/admin/commission"
+          element={<ProtectedRoute element={<Commission />} />}
+        />
+        <Route
+          path="/admin/teacherlist"
+          element={<ProtectedRoute element={<TeacherList />} />}
         />
         <Route
           path="/admin/users"
