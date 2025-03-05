@@ -6,9 +6,10 @@ import { CgMenu } from "react-icons/cg";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Dialog, DialogPanel } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import { MdOutlineSpaceDashboard } from "react-icons/md";
+import { MdOutlineRateReview, MdOutlineSpaceDashboard } from "react-icons/md";
 import { IoSettingsOutline } from "react-icons/io5";
 import { FiUsers } from "react-icons/fi";
+import { HiOutlineUserGroup } from "react-icons/hi";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -75,7 +76,7 @@ function Navbar() {
                         }
                       >
                         <div className="flex items-center gap-[15px] hover:text-white">
-                          <MdOutlineSpaceDashboard className="group-hover:text-white" />
+                          <HiOutlineUserGroup className="group-hover:text-white" />
                           <h1 className="mb-0 text-[16px] font-bold leading-[2%] group-hover:text-white">
                             Users
                           </h1>
@@ -114,6 +115,24 @@ function Navbar() {
                           <FiUsers className="group-hover:text-white" />
                           <h1 className="mb-0 text-[16px] font-bold leading-[2%] group-hover:text-white">
                             Teachers
+                          </h1>
+                        </div>
+                      </NavLink>
+
+                      <NavLink
+                        to="/admin/review"
+                        className={({ isActive }) =>
+                          `rounded-[8px] p-[17px] group hover:bg-primary ${
+                            isActive
+                              ? "bg-primary text-white"
+                              : "bg-white text-nevyblue"
+                          }`
+                        }
+                      >
+                        <div className="flex items-center gap-[15px] hover:text-white">
+                          <MdOutlineRateReview className="group-hover:text-white" />
+                          <h1 className="mb-0 text-[16px] font-bold leading-[2%] group-hover:text-white">
+                            Review
                           </h1>
                         </div>
                       </NavLink>

@@ -16,6 +16,7 @@ const Commission = lazy(() => import("../Commission/Commission"));
 const TeacherList = lazy(() => import("../Teachers/teacherList"));
 const Dashboard = lazy(() => import("../admin/pages/dashboard/Dashboard"));
 const Users = lazy(() => import("../admin/pages/users/Users"));
+const Review = lazy(() => import("../Review/Review"));
 
 function Router() {
   return (
@@ -26,7 +27,7 @@ function Router() {
           path="/"
           element={
             isAuthenticated() ? (
-              <Navigate to="/admin/setting" replace />
+              <Navigate to="/admin/dashboard" replace />
             ) : (
               <Login />
             )
@@ -42,6 +43,10 @@ function Router() {
         <Route
           path="/admin/setting"
           element={<ProtectedRoute element={<Adminsetting />} />}
+        />
+        <Route
+          path="/admin/review"
+          element={<ProtectedRoute element={<Review />} />}
         />
         <Route
           path="/admin/commission"
