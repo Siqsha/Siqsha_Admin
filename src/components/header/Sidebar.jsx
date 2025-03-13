@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import { MdOutlineRateReview, MdOutlineSpaceDashboard } from "react-icons/md";
 // import { CgAddR } from "react-icons/cg";
 import { IoSettingsOutline } from "react-icons/io5";
-import { HiOutlineUserGroup } from "react-icons/hi";
+import { HiOutlineCreditCard, HiOutlineUserGroup } from "react-icons/hi";
 import { FiUsers } from "react-icons/fi";
 
 function Sidebar() {
@@ -53,6 +53,31 @@ function Sidebar() {
           </NavLink>
 
           {/* <NavLink
+            to="/admin/admanagement"
+            className={({ isActive }) =>
+              `rounded-[8px] p-[17px] group hover:bg-primary ${
+                isActive ? "bg-primary text-white" : "bg-white text-nevyblue"
+              }`
+            }
+          >
+            <div className="flex items-center gap-[15px] hover:text-white">
+              
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                fill="currentColor"
+                className="group-hover:text-white mi-solid mi-window-dock-undock"
+                viewBox="0 0 24 24"
+              >
+                <path d="M7 4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h14c.55 0 1-.45 1-1V5c0-.55-.45-1-1-1zm13 10H8V7h12zm-4 4H4V8H3c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h14c.55 0 1-.45 1-1v-1z" />
+              </svg>
+              <h1 className="mb-0  text-[16px] font-bold leading-[2%] group-hover:text-white">
+                Ad Management
+              </h1>
+            </div>
+          </NavLink> */}
+
+          <NavLink
             to="/admin/commission"
             className={({ isActive }) =>
               `rounded-[8px] p-[17px] group hover:bg-primary ${
@@ -61,14 +86,14 @@ function Sidebar() {
             }
           >
             <div className="flex items-center gap-[15px] hover:text-white">
-              <IoSettingsOutline className="group-hover:text-white text-2xl" />
+              <HiOutlineCreditCard className="group-hover:text-white text-2xl" />
               <h1 className="mb-0  text-[16px] font-bold leading-[2%] group-hover:text-white">
                 Commission
               </h1>
             </div>
-          </NavLink> */}
+          </NavLink>
 
-          <NavLink
+          {/* <NavLink
             to="/admin/teacherlist"
             className={({ isActive }) =>
               `rounded-[8px] p-[17px] group hover:bg-primary ${
@@ -82,7 +107,7 @@ function Sidebar() {
                 Teachers
               </h1>
             </div>
-          </NavLink>
+          </NavLink> */}
 
           <NavLink
             to="/admin/review"
@@ -95,7 +120,7 @@ function Sidebar() {
             <div className="flex items-center gap-[15px] hover:text-white">
               <MdOutlineRateReview className="group-hover:text-white text-2xl" />
               <h1 className="mb-0 text-[16px] font-bold leading-[2%] group-hover:text-white">
-                Review
+                Feedback
               </h1>
             </div>
           </NavLink>

@@ -17,6 +17,7 @@ const TeacherList = lazy(() => import("../Teachers/teacherList"));
 const Dashboard = lazy(() => import("../admin/pages/dashboard/Dashboard"));
 const Users = lazy(() => import("../admin/pages/users/Users"));
 const Review = lazy(() => import("../Review/Review"));
+const AdManagement = lazy(() => import("../AdManagement/AdManagement"));
 
 function Router() {
   return (
@@ -47,6 +48,10 @@ function Router() {
         <Route
           path="/admin/review"
           element={<ProtectedRoute element={<Review />} />}
+        />
+        <Route
+          path="/admin/admanagement"
+          element={<ProtectedRoute element={<AdManagement />} />}
         />
         <Route
           path="/admin/commission"

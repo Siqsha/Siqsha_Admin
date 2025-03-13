@@ -1,55 +1,39 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CommonLayout from "../../components/common/CommonLayout";
+import { getCommissionList } from "../services/apis/userApi";
+import CommissionModal from "../../model/CommissionModal";
 
 const Commission = () => {
-  const [selectedStatus, setSelectedStatus] = useState("All");
+  // const [selectedStatus, setSelectedStatus] = useState("All");
+  const [users, setUsers] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
 
-  const users = [
-    {
-      username: "Revanth",
-      role: "Teacher",
-      email: "riyas@gmail.com",
-      weekly: true,
-      monthly: false,
-      perTransaction: false,
-      remark:
-        "As per the teacher’s request, I have changed the plan from Monthly to Silver",
-    },
-    {
-      username: "Riyas",
-      role: "Student",
-      email: "riyas@gmail.com",
-      weekly: false,
-      monthly: false,
-      perTransaction: false,
-      remark: "— — —",
-    },
-    {
-      username: "John",
-      role: "Teacher",
-      email: "john@gmail.com",
-      weekly: false,
-      monthly: false,
-      perTransaction: true,
-      remark: "— — —",
-    },
-    {
-      username: "Gowtham",
-      role: "Student",
-      email: "gowtham@gmail.com",
-      weekly: true,
-      monthly: false,
-      perTransaction: false,
-      remark:
-        "As per the teacher’s request, I have changed the plan from Monthly to Silver",
-    },
-  ];
+  const fetchCommissionUsers = async () => {
+    try {
+      const response = await getCommissionList();
+      if (response.users) {
+        setUsers(response.users);
+      }
+    } catch (error) {
+      console.error("Error fetching users:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCommissionUsers();
+  }, []);
+
+  const handleAddCommission = (user) => {
+    setSelectedUser(user);
+    setIsModalOpen(true);
+  };
 
   return (
     <CommonLayout title={"Commission"}>
-      <div className="px-4 sm:px-6 lg:px-8">
-        <div className="p-4">
-          <div className="flex justify-between mb-4">
+      <div className="mt-8 flow-root bg-white">
+        <div className="md:p-8 p-4">
+          {/* <div className="flex justify-end mb-4 mt-4">
             <input
               type="text"
               placeholder="Search"
@@ -62,39 +46,80 @@ const Commission = () => {
               <option value="All">Status</option>
               <option value="Weekly">Weekly</option>
               <option value="Monthly">Monthly</option>
-              <option value="Per transaction">Per transaction</option>
+              <option value="Per transaction">Per Class</option>
             </select>
-          </div>
-          <table className="w-full border-collapse border border-gray-300">
-            <thead>
-              <tr className="bg-gray-100">
-                <th className="border p-2">USERNAME</th>
-                <th className="border p-2">ROLE</th>
-                <th className="border p-2">MAIL ID</th>
-                <th className="border p-2">WEEKLY</th>
-                <th className="border p-2">MONTHLY</th>
-                <th className="border p-2">PER TRANSACTION</th>
-                <th className="border p-2">REMARK</th>
-              </tr>
-            </thead>
-            <tbody>
-              {users.map((user, index) => (
-                <tr key={index} className="text-center">
-                  <td className="border p-2">{user.username}</td>
-                  <td className="border p-2">{user.role}</td>
-                  <td className="border p-2">{user.email}</td>
-                  <td className="border p-2">{user.weekly ? "✔" : ""}</td>
-                  <td className="border p-2">{user.monthly ? "✔" : ""}</td>
-                  <td className="border p-2">
-                    {user.perTransaction ? "✔" : ""}
-                  </td>
-                  <td className="border p-2">{user.remark}</td>
+          </div> */}
+          <div className=" overflow-auto mt-4">
+            <table className="min-w-full ">
+              <thead>
+                <tr className="bg-[#D9D9D9]">
+                  <th className="p-2 text-[#524C4C]">USER NAME</th>
+                  <th className="p-2 text-[#524C4C]">ROLE</th>
+                  <th className="p-2 text-[#524C4C]">EMAIL</th>
+                  <th className="p-2 text-[#524C4C]">PER CLASS</th>
+                  <th className="p-2 text-[#524C4C]">MONTHLY</th>
+                  <th className="p-2 text-[#524C4C]">YEARLY</th>
+                  {/* <th className="border p-2">REMARK</th>*/}
+                  <th className="p-2 text-[#524C4C] ">ACTION</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className=" text-center ">
+                {users?.map((user, index) => (
+                  <tr key={index} className="text-center ">
+                    <td className="text-[#524C4C] px-2 py-4 ">
+                      {user.user.firstName} {user.user.lastName}
+                    </td>
+                    <td className="text-[#524C4C] px-2 py-4">
+                      {user.user.role}
+                    </td>
+                    <td className="text-[#524C4C] px-2 py-4">
+                      {user.user.email}
+                    </td>
+                    <td className="text-[#524C4C] px-2 py-4">
+                      <input
+                        type="checkbox"
+                        checked={user.commission === "perclass" ? "✔" : ""}
+                        className="accent-primary w-[24px] h-[24px] rounded-[4px]"
+                        readOnly
+                      />
+                    </td>
+                    <td className="text-[#524C4C] px-2 py-4">
+                      <input
+                        type="checkbox"
+                        checked={user.commission === "monthly" ? "✔" : ""}
+                        className="accent-primary w-[24px] h-[24px] rounded-[4px]"
+                        readOnly
+                      />
+                    </td>
+                    <td className="text-[#524C4C] px-2 py-4">
+                      <input
+                        type="checkbox"
+                        checked={user.commission === "yearly" ? "✔" : ""}
+                        className="accent-primary w-[24px] h-[24px] rounded-[4px]"
+                        readOnly
+                      />
+                    </td>
+
+                    <td className="px-2 py-4">
+                      <button
+                        className="bg-primary text-white px-3 py-1 rounded  transition"
+                        onClick={() => handleAddCommission(user)}
+                      >
+                        Add Commission
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
+      <CommissionModal
+        open={isModalOpen}
+        setOpen={setIsModalOpen}
+        selectedUser={selectedUser}
+      />
     </CommonLayout>
   );
 };

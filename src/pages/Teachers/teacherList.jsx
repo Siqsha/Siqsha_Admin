@@ -1,5 +1,4 @@
 import React from "react";
-// import dayjs from "dayjs";
 import UserImage from "../../assets/Images/UserImage.png";
 import {
   pendingTrialRequest,
@@ -19,7 +18,6 @@ function TeacherList() {
   const { showMessageModal } = useMessageModal();
   const { showConfirmationModal } = useConfirmationModal();
 
-  // Fetch pending trial requests
   const fetchTeacherList = async () => {
     setLoading(true);
     try {
@@ -33,28 +31,29 @@ function TeacherList() {
     setLoading(false);
   };
 
-  // Run fetch function on component mount
   useEffect(() => {
     fetchTeacherList();
   }, []);
 
   const handleTrialUpdate = async (teacherId, action) => {
     try {
-      const response = await updateTrial({ teacherId, action }); // ✅ Corrected API call
+      const response = await updateTrial({ teacherId, action });
 
       if (response.success) {
         showMessageModal(response);
         setTeachers((prevTeachers) =>
           prevTeachers.map((teacher) =>
-            teacher._id === teacherId
-              ? { ...teacher, status: action } // Add or update a `status` field
-              : teacher
+            teacher._id === teacherId ? { ...teacher, status: action } : teacher
           )
         );
       } else {
         showMessageModal(response.message);
       }
-    } catch (error) {}
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setUpdatingStatus((prev) => ({ ...prev, [teacherId]: false }));
+    }
   };
 
   return (
@@ -80,7 +79,7 @@ function TeacherList() {
                         </th>
                       </tr>
                     </thead>
-                    {console.log("teachers", teachers)}
+
                     <tbody className="divide-y divide-gray-200 text-center">
                       {teachers?.map((teacher) => (
                         <tr key={teacher.email}>
@@ -156,7 +155,7 @@ function TeacherList() {
                             colSpan="3"
                             className="py-5 text-center text-gray-500 text-lg"
                           >
-                            No pending trial requested Teachers.
+                            No pending trial requested Teachers Found.
                           </td>
                         </tr>
                       )}

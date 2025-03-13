@@ -38,10 +38,13 @@ export const getAllUsers = (role, forceRefresh, page) => {
 //     };
 //   };
 
-export const getUserProfile = async (id) => {
-  return await handleApiRequest("GET", "/get-profile/" + id, true);
-};
+// export const getUserProfile = async (id) => {
+//   return await handleApiRequest("GET", "/get-profile/" + id, true);
+// };
 
+export const getUserProfile = async () => {
+  return await handleApiRequest("GET", "/get-profile", true);
+};
 
 export const changeStatus = async (userId, data) => {
   return await handleApiRequest("PUT", `/change-status/${userId}`, data, true);
@@ -53,4 +56,24 @@ export const pendingTrialRequest = async () => {
 
 export const updateTrial = async (formData) => {
   return await handleApiRequest("POST", "/update-action", formData);
+}
+
+export const getCommissionList = async () => {
+  return await handleApiRequest("GET", "/get-users-list")
+}
+
+export const updateAndRespondeCommission = async (formData) => {
+  return await handleApiRequest("PUT", "/commission", formData)
+}
+
+export const updateAdrequset = async (formData) => {
+  return await handleApiRequest("PUT", "/ad-respond", formData)
+}
+
+export const getAdRequsetUsers = async (page = 1, limit = 10) => {
+  return await handleApiRequest("GET", `/get-adrequest-users?page=${page}&limit=${limit}`)
+}
+
+export const getUsersSubscriptionDetail = async () => {
+  return await handleApiRequest("GET", "/status")
 }

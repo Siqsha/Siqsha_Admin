@@ -59,12 +59,12 @@ const Review = () => {
   };
 
   return (
-    <CommonLayout title={"Reviews"}>
+    <CommonLayout title={"Feedback"}>
       <div className="px-4 sm:px-6 lg:px-4">
         {isLoading ? (
           <ReviewSkeleton />
         ) : reviews.length === 0 ? (
-          <>No Reviews Found</>
+          <>No Feedbacks Found</>
         ) : (
           <section>
             {reviews.map((review) => (
