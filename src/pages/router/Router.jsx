@@ -18,6 +18,8 @@ const Dashboard = lazy(() => import("../admin/pages/dashboard/Dashboard"));
 const Users = lazy(() => import("../admin/pages/users/Users"));
 const Review = lazy(() => import("../Review/Review"));
 const AdManagement = lazy(() => import("../AdManagement/AdManagement"));
+const Coupon = lazy(() => import("../Coupon/Coupon"));
+const MyApproval = lazy(() => import("../MyApproval/MyApproval"));
 
 function Router() {
   return (
@@ -58,6 +60,10 @@ function Router() {
           element={<ProtectedRoute element={<Commission />} />}
         />
         <Route
+          path="/admin/coupon"
+          element={<ProtectedRoute element={<Coupon />} />}
+        />
+        <Route
           path="/admin/teacherlist"
           element={<ProtectedRoute element={<TeacherList />} />}
         />
@@ -72,6 +78,10 @@ function Router() {
         <Route
           path="/admin/teachers"
           element={<ProtectedRoute element={<TeacherDetails />} />}
+        />
+        <Route
+          path="/admin/myapproval"
+          element={<ProtectedRoute element={<MyApproval />} />}
         />
       </Routes>
     </Suspense>

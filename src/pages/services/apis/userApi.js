@@ -77,3 +77,11 @@ export const getAdRequsetUsers = async (page = 1, limit = 10) => {
 export const getUsersSubscriptionDetail = async () => {
   return await handleApiRequest("GET", "/status")
 }
+
+export const getCredibiltyTeachers = async (page = 1, limit = 20) => {
+  return await handleApiRequest("GET", `/get-crediblity-teachers?page=${page}&limit=${limit}`)
+}
+
+export const respondCredibility = async (formData) => {
+  return await handleApiRequest("POST", "/respond-credibility", formData)
+}

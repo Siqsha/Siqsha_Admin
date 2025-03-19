@@ -77,7 +77,7 @@ function Sidebar() {
             </div>
           </NavLink> */}
 
-          <NavLink
+          {/* <NavLink
             to="/admin/commission"
             className={({ isActive }) =>
               `rounded-[8px] p-[17px] group hover:bg-primary ${
@@ -91,7 +91,39 @@ function Sidebar() {
                 Commission
               </h1>
             </div>
+          </NavLink> */}
+
+          <NavLink
+            to="/admin/myapproval"
+            className={({ isActive }) =>
+              `rounded-[8px] p-[17px] group hover:bg-primary ${
+                isActive ? "bg-primary text-white" : "bg-white text-nevyblue"
+              }`
+            }
+          >
+            <div className="flex items-center gap-[15px] hover:text-white">
+              <HiOutlineCreditCard className="group-hover:text-white text-2xl" />
+              <h1 className="mb-0  text-[16px] font-bold leading-[2%] group-hover:text-white">
+                My Approval
+              </h1>
+            </div>
           </NavLink>
+
+          {/* <NavLink
+            to="/admin/coupon"
+            className={({ isActive }) =>
+              `rounded-[8px] p-[17px] group hover:bg-primary ${
+                isActive ? "bg-primary text-white" : "bg-white text-nevyblue"
+              }`
+            }
+          >
+            <div className="flex items-center gap-[15px] hover:text-white">
+              <HiOutlineCreditCard className="group-hover:text-white text-2xl" />
+              <h1 className="mb-0  text-[16px] font-bold leading-[2%] group-hover:text-white">
+                Coupon Management
+              </h1>
+            </div>
+          </NavLink> */}
 
           {/* <NavLink
             to="/admin/teacherlist"
