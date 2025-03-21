@@ -38,7 +38,7 @@ function CommissionModal({ open, setOpen, selectedUser }) {
         setData(response);
         setOpen(false);
       }
-      console.log("Commission submitted", response);
+      
     } catch (error) {
       console.error("Error submitting commission:", error);
     } finally {

@@ -90,7 +90,7 @@ function Navbar() {
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-gray-700 border border-primary rounded-full p-1 fixed top-3 z-50 left-[258px]"
+                className="text-gray-700 border border-primary rounded-full p-1 fixed top-3 z-50 left-[270px]"
               >
                 <span className="sr-only">Close menu</span>
                 <XMarkIcon aria-hidden="true" className="size-5" />
@@ -98,7 +98,7 @@ function Navbar() {
             </div>
           </div>
           <div className="fixed inset-0 z-[40] bg-[#00000038]" />
-          <DialogPanel className="fixed inset-y-0 left-0 z-[50] top-0 overflow-y-auto bg-white p-[20px] max-w-[250px] w-full sm:ring-1 sm:ring-gray-900/10 h-full ">
+          <DialogPanel className="fixed inset-y-0 left-0 z-[50] top-0 overflow-y-auto bg-white p-[20px] max-w-[264px] w-full sm:ring-1 sm:ring-gray-900/10 h-full ">
             <div className="mt-6 flow-root">
               <div className="-my-6 divide-y divide-gray-500/10">
                 <div className="pb-[20px]">
@@ -141,7 +141,7 @@ function Navbar() {
                       </NavLink>
 
                       <NavLink
-                        to="/admin/myapproval"
+                        to="/admin/myapprovals"
                         className={({ isActive }) =>
                           `rounded-[8px] p-[17px] group hover:bg-primary ${
                             isActive
@@ -153,7 +153,7 @@ function Navbar() {
                         <div className="flex items-center gap-[15px] hover:text-white">
                           <HiOutlineUserGroup className="group-hover:text-white" />
                           <h1 className="mb-0 text-[16px] font-bold leading-[2%] group-hover:text-white">
-                            My Approval
+                            My Approvals
                           </h1>
                         </div>
                       </NavLink>
@@ -168,8 +168,8 @@ function Navbar() {
                           }`
                         }
                       >
-                        <div className="flex items-center gap-[15px] hover:text-white">
-                          <HiOutlineCreditCard className="group-hover:text-white" />
+                        <div className="flex items-center gap-[15px] hover:text-white ">
+                          <HiOutlineCreditCard className="text-[20px] group-hover:text-white" />
                           <h1 className="mb-0 text-[16px] font-bold leading-[2%] group-hover:text-white">
                             Coupon Management
                           </h1>
@@ -275,8 +275,11 @@ function Navbar() {
                         </div>
                       </NavLink>
                     </div>
-                    <div className="rounded-[6px] p-[17px] group hover:bg-primary ">
-                      <button onClick={handleLogoutUser}>
+                    <div>
+                      <button
+                        onClick={handleLogoutUser}
+                        className="rounded-[6px] p-[17px] group hover:bg-primary cursor-pointer w-full"
+                      >
                         <div className="rounded-[6px] group hover:bg-primary">
                           <div className="flex items-center gap-[15px] hover:text-white">
                             <PiSignOutBold className="group-hover:text-white text-[22px]" />

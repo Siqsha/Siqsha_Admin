@@ -11,7 +11,7 @@ import { ErrorMessage } from "formik";
 
 const SelectList = ({
   label,
-  options,
+  options = [],
   value,
   onChange,
   name,
@@ -30,7 +30,10 @@ const SelectList = ({
         )}{" "}
       </label>
       <Listbox
-        value={options.find((option) => option.value === value)}
+        value={
+          options.length !== 0 &&
+          options?.find((option) => option.value === value)
+        }
         onChange={onChange}
         disabled={isReadOnly}
       >
@@ -53,20 +56,30 @@ const SelectList = ({
           </ListboxButton>
 
           <ListboxOptions className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-            {options.map((option) => (
+            {options?.map((option) => (
               <ListboxOption
                 key={option.id}
                 value={option.value}
                 className="group relative cursor-default select-none py-2 pl-3 pr-9 text-gray-900 data-[focus]:bg-primary data-[focus]:text-white"
               >
-                <div className="flex items-center">
-                  <span className="ml-3 block truncate font-normal group-data-[selected]:font-semibold">
-                    {option.name}
-                  </span>
-                </div>
-                <span className="absolute inset-y-0 right-0 flex items-center pr-4 text-primary group-data-[focus]:text-white [.group:not([data-selected])_&]:hidden">
-                  <CheckIcon aria-hidden="true" className="h-5 w-5" />
-                </span>
+                {({ selected }) => (
+                  <>
+                    <div className="flex items-center capitalize">
+                      <span
+                        className={`ml-3 block truncate font-normal ${
+                          selected ? "font-semibold" : ""
+                        }`}
+                      >
+                        {option.name}
+                      </span>
+                    </div>
+                    {selected && (
+                      <span className="absolute inset-y-0 right-0 flex items-center pr-4 text-primary">
+                        <CheckIcon aria-hidden="true" className="h-5 w-5" />
+                      </span>
+                    )}
+                  </>
+                )}
               </ListboxOption>
             ))}
           </ListboxOptions>
@@ -84,3 +97,4 @@ const SelectList = ({
 };
 
 export default SelectList;
+

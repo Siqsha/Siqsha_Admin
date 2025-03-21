@@ -68,20 +68,20 @@ const Review = () => {
         ) : (
           <section>
             {reviews.map((review) => (
-              <div key={review._id} className=" bg-white">
+              <div key={review?._id} className=" bg-white">
                 <div className="border-b border-gray-300 rounded-lg sm:p-6 pb-4 p-4">
                   <div className="flex gap-[8px] lg:gap-[15px]">
                     <div>
                       <div className="flex items-center gap-[8x] mb-[8px]">
                         <div className="font-semibold md:text-xl text-base text-gray-600">
-                          {`${review.reviewerId.firstName} ${review.reviewerId.lastName}`}
+                          {`${review.reviewerId?.firstName} ${review.reviewerId?.lastName}`}
                         </div>
 
                         <div className="text-gray-500">
                           <BsDot className="text-2xl" />
                         </div>
                         <div className="text-gray-500 mb-0">
-                          {formatReviewDate(review.createdAt)}
+                          {formatReviewDate(review?.createdAt)}
                         </div>
                       </div>
 
@@ -92,7 +92,7 @@ const Review = () => {
                             <FaStar
                               key={i}
                               className={`w-5 h-5 ${
-                                i < review.rating
+                                i < review?.rating
                                   ? "text-yellow"
                                   : "text-gray-300"
                               }`}
@@ -100,11 +100,11 @@ const Review = () => {
                           ))}
                       </div>
 
-                      <p className="text-gray-600">{review.feedback}</p>
+                      <p className="text-gray-600">{review?.feedback}</p>
 
                       {review.answer && (
                         <div className="mt-2 text-base font-medium text-gray-600 flex gap-2 items-center pl-4">
-                          Answer:<p className="font-normal">{review.answer}</p>
+                          Answer:<p className="font-normal">{review?.answer}</p>
                         </div>
                       )}
                       {!review.answer && (

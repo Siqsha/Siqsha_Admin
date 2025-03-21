@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import CommonLayout from "../../components/common/CommonLayout";
-import UserTableSkeleton from "../../components/skeleton/UserTableSkeleton";
 import UserImage from "../../assets/Images/UserImage.png";
 import {
   getCredibiltyTeachers,
   respondCredibility,
 } from "../services/apis/userApi";
+import MyApprovalSkeleton from "../../components/skeleton/MyApprovalSkeleton";
+import { useMessageModal } from "../../contexts/MessageModalContext";
 
 const MyApproval = () => {
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [updatingStatus, setUpdatingStatus] = useState({});
+  const { showMessageModal } = useMessageModal();
 
   const fetchAllTeachers = async () => {
     setIsLoading(true);
@@ -40,7 +42,12 @@ const MyApproval = () => {
     // setUpdatingStatus((prev) => ({ ...prev, [userId]: true }));
 
     try {
-      await respondCredibility({ teacherId: userId, action, isCredible });
+      const response = await respondCredibility({
+        teacherId: userId,
+        action,
+        isCredible,
+      });
+      showMessageModal(response);
       await fetchAllTeachers(); // Refresh list
     } catch (error) {
       console.error("Error responding to credibility request:", error);
@@ -48,10 +55,10 @@ const MyApproval = () => {
   };
 
   return (
-    <CommonLayout title={"teachers"}>
+    <CommonLayout title={"Requests"}>
       <div className="px-4 sm:px-6 lg:px-4">
         {isLoading ? (
-          <UserTableSkeleton />
+          <MyApprovalSkeleton />
         ) : users.length === 0 ? (
           <>No Teachers Found</>
         ) : (
@@ -86,7 +93,7 @@ const MyApproval = () => {
                     {users?.map((user) => (
                       <tr key={user.email}>
                         <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
-                          <div className="flex items-center">
+                          <div className="flex items-center justify-center">
                             <div className="size-11 shrink-0">
                               <img
                                 alt="profile"
@@ -118,6 +125,37 @@ const MyApproval = () => {
                                 : "bg-green-600 hover:bg-green-700"
                             } text-white`}
                           >
+                            {updatingStatus[user._id]?.approve
+                              ? "Approving..."
+                              : "Approve"}
+                          </button>
+
+                          <button
+                            onClick={() =>
+                              handleToggleAction(user._id, "reject")
+                            }
+                            disabled={updatingStatus[user._id]?.reject}
+                            className={`px-4 py-2 rounded text-sm font-semibold ${
+                              updatingStatus[user._id]?.reject
+                                ? "bg-red cursor-not-allowed opacity-60"
+                                : "bg-red hover:bg-red-700"
+                            } text-white`}
+                          >
+                            {updatingStatus[user._id]?.reject
+                              ? "Rejecting..."
+                              : "Reject"}
+                          </button>
+                          {/* <button
+                            onClick={() =>
+                              handleToggleAction(user._id, "approve")
+                            }
+                            disabled={updatingStatus[user._id]?.approve}
+                            className={`px-4 py-2 rounded text-sm font-semibold ${
+                              updatingStatus[user._id]?.approve
+                                ? "bg-green-400 cursor-not-allowed opacity-60"
+                                : "bg-green-600 hover:bg-green-700"
+                            } text-white`}
+                          >
                             Approve
                           </button>
 
@@ -133,7 +171,7 @@ const MyApproval = () => {
                             } text-white`}
                           >
                             Reject
-                          </button>
+                          </button> */}
                         </td>
                       </tr>
                     ))}

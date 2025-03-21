@@ -49,7 +49,7 @@ const TextInput = ({
           }
           min={type === "number" ? 0 : undefined}
           onKeyDown={handleKeyDown}
-          className={`block w-full border-[1px] border-secondary2 text-black bg-white rounded-[4px] px-[16px] py-[10px] appearance-none mt-[5px] focus:outline-none `}
+          className={`block w-full border-[1px] border-[#abaaaa] text-black bg-white rounded-[4px] px-[16px] py-[10px] appearance-none mt-[5px] focus:outline-none `}
           placeholder={placeholder}
         />
         {type === "password" && togglePasswordVisibility && (

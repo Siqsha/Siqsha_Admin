@@ -11,16 +11,20 @@ const DatePickerInput = ({ label, name, isRequired = false }) => (
     </label>
     <Field name={name}>
       {({ field, form }) => {
-        const { setFieldValue } = form;
+        const { setFieldValue, setFieldTouched } = form;
         const { value } = field;
 
         return (
           <DatePicker
             selected={value ? new Date(value) : null}
-            onChange={(date) => setFieldValue(name, date)}
-            className="block w-full border-[1px] border-secondary2 text-black bg-white rounded-[4px] px-[16px] py-[10px] appearance-none mt-[5px] focus:outline-none"
+            onChange={(date) => {
+              setFieldTouched(name, true);
+              setFieldValue(name, date);
+            }}
+            className="block !w-full border-[1px] border-[#abaaaa] text-black bg-white rounded-[4px] px-[16px] py-[10px] appearance-none mt-[5px] focus:outline-none"
             placeholderText="Select Date"
             dateFormat="dd-MM-yyyy"
+            minDate={new Date()}
           />
         );
       }}
