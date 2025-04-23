@@ -40,3 +40,9 @@ body {
   background: #888;
   border-radius: 10px;
 }
+.react-datepicker__close-icon {
+  right: -42px !important;
+}
+.react-datepicker__close-icon::after {
+  background-color: #002060 !important;
+}

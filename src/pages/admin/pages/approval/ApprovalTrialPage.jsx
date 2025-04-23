@@ -48,7 +48,7 @@ const ApprovalTrialPage = () => {
         });
       } else {
         const res = await updateTrial({ teacherId: userId, action });
-        console.log(res.message);
+       
       }
       fetchData(); // Refresh after action
     } catch (err) {

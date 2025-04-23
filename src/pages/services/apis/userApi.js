@@ -1,4 +1,4 @@
-import { fetchUsersFailure, fetchUsersRequest, fetchUsersSuccess } from "../../../redux/actionCreator/actionCreator";
+import { fetchFilterInvoice, fetchFilterInvoiceFailure, fetchFilterInvoiceSuccess, fetchFilterTransction, fetchFilterTransctionFailure, fetchFilterTransctionSuccess, fetchUsersFailure, fetchUsersInvoice, fetchUsersInvoiceFailure, fetchUsersInvoiceSuccess, fetchUsersRequest, fetchUsersSuccess, fetchUsersTransction, fetchUsersTransctionFailure, fetchUsersTransctionSuccess } from "../../../redux/actionCreator/actionCreator";
 import { handleApiRequest } from "../../../utils/handleApiRequest";
 
 export const getAllUsers = (role, forceRefresh, page) => {
@@ -16,6 +16,102 @@ export const getAllUsers = (role, forceRefresh, page) => {
     }
   };
 };
+
+
+export const getSubscriptionsByRole = (role, forceRefresh, page = 1) => {
+  return async (dispatch) => {
+    dispatch(fetchUsersTransction());
+
+    try {
+      const res = await handleApiRequest("GET", `/subsciption-data/${role}?page=${page}&limit=10`);
+      dispatch(fetchUsersTransctionSuccess({
+        data: res.data || [],
+        pagination: res.pagination
+      }));
+      return res;
+    } catch (error) {
+      dispatch(fetchUsersTransctionFailure(error.message));
+      throw error;
+    }
+  };
+};
+
+export const getInvoiceList = (forceRefresh, page = 1) => {
+  return async (dispatch) => {
+    dispatch(fetchUsersInvoice());
+
+    try {
+      const res = await handleApiRequest("GET", `/get-invoice-data?page=${page}&limit=10`);
+      dispatch(fetchUsersInvoiceSuccess({
+        data: res.data.invoices
+          || [],
+        pagination: res.pagination
+      }));
+      return res;
+    } catch (error) {
+      dispatch(fetchUsersInvoiceFailure(error.message));
+      throw error;
+    }
+  };
+};
+
+export const getFilteredTeacherInvoices = (filters = {}, page = 1) => {
+  return async (dispatch) => {
+    dispatch(fetchFilterInvoice());
+
+    try {
+      const params = {
+        ...filters,
+        page,
+      };
+
+      const response = await handleApiRequest("GET", `/invoice-filter`, params);
+
+      dispatch(fetchFilterInvoiceSuccess({
+        data: {
+          invoices: response.data.invoices || [],
+          pagination: response.data.pagination || {},
+        },
+      }));
+
+      return response;
+
+    } catch (error) {
+      dispatch(fetchFilterInvoiceFailure(error.message));
+      throw error;
+    }
+  };
+};
+
+export const getFilteredSubscriptions = (role, filters = {}, page = 1) => {
+  return async (dispatch) => {
+    dispatch(fetchFilterTransction());
+
+    try {
+      const params = {
+        ...filters,
+        page,
+      };
+      const response = await handleApiRequest(
+        "GET",
+        `/subscription-filter/${role}`, params
+      );
+
+      console.log('response', response)
+      dispatch(fetchFilterTransctionSuccess({
+        data: response.data,
+        pagination: response.pagination
+      }));
+
+      return response;
+
+    } catch (error) {
+      dispatch(fetchFilterTransctionFailure(error.message));
+      throw error;
+    }
+  };
+};
+
 // export const getAllUsers = (role, forceRefresh, page) => {
 //     return async (dispatch, getState) => {
 //       const { users } = getState().users;
@@ -84,4 +180,8 @@ export const getCredibiltyTeachers = async (page = 1, limit = 20) => {
 
 export const respondCredibility = async (formData) => {
   return await handleApiRequest("POST", "/respond-credibility", formData)
+}
+
+export const handleCalculateCommission = async (formData) => {
+  return await handleApiRequest("POST", "/calculateTeacherFee", formData)
 }

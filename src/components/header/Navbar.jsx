@@ -14,6 +14,9 @@ import NotificationDropdown from "../../model/NotificationDropdown";
 import { allNotifications } from "../../pages/services/apis/connection";
 import { socket } from "../../utils/socketUtils";
 import { getUserProfile } from "../../pages/services/apis/userApi";
+import { BsFileEarmarkCheck } from "react-icons/bs";
+import { FaHandHoldingDollar } from "react-icons/fa6";
+import { LiaFileInvoiceDollarSolid } from "react-icons/lia";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -141,7 +144,7 @@ function Navbar() {
                       </NavLink>
 
                       <NavLink
-                        to="/admin/myapprovals"
+                        to="/admin/myapproval"
                         className={({ isActive }) =>
                           `rounded-[8px] p-[17px] group hover:bg-primary ${
                             isActive
@@ -151,14 +154,14 @@ function Navbar() {
                         }
                       >
                         <div className="flex items-center gap-[15px] hover:text-white">
-                          <HiOutlineUserGroup className="group-hover:text-white" />
+                          <BsFileEarmarkCheck className="group-hover:text-white" />
                           <h1 className="mb-0 text-[16px] font-bold leading-[2%] group-hover:text-white">
                             My Approvals
                           </h1>
                         </div>
                       </NavLink>
 
-                      {/* <NavLink
+                      <NavLink
                         to="/admin/coupon"
                         className={({ isActive }) =>
                           `rounded-[8px] p-[17px] group hover:bg-primary ${
@@ -174,7 +177,7 @@ function Navbar() {
                             Coupon Management
                           </h1>
                         </div>
-                      </NavLink> */}
+                      </NavLink>
 
                       {/* <NavLink
                         to="/admin/admanagement"
@@ -253,6 +256,42 @@ function Navbar() {
                           <MdOutlineRateReview className="group-hover:text-white" />
                           <h1 className="mb-0 text-[16px] font-bold leading-[2%] group-hover:text-white">
                             Feedback
+                          </h1>
+                        </div>
+                      </NavLink>
+
+                      <NavLink
+                        to="/admin/financial"
+                        className={({ isActive }) =>
+                          `rounded-[8px] p-[17px] group hover:bg-primary ${
+                            isActive
+                              ? "bg-primary text-white"
+                              : "bg-white text-nevyblue"
+                          }`
+                        }
+                      >
+                        <div className="flex items-center gap-[15px] hover:text-white">
+                          <FaHandHoldingDollar className="group-hover:text-white" />
+                          <h1 className="mb-0 text-[16px] font-bold leading-[2%] group-hover:text-white">
+                            Financial
+                          </h1>
+                        </div>
+                      </NavLink>
+
+                      <NavLink
+                        to="/admin/invoice"
+                        className={({ isActive }) =>
+                          `rounded-[8px] p-[17px] group hover:bg-primary ${
+                            isActive
+                              ? "bg-primary text-white"
+                              : "bg-white text-nevyblue"
+                          }`
+                        }
+                      >
+                        <div className="flex items-center gap-[15px] hover:text-white">
+                          <LiaFileInvoiceDollarSolid className="group-hover:text-white" />
+                          <h1 className="mb-0 text-[16px] font-bold leading-[2%] group-hover:text-white">
+                            Invoice
                           </h1>
                         </div>
                       </NavLink>

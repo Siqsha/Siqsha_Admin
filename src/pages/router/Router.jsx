@@ -16,6 +16,8 @@ const Commission = lazy(() => import("../Commission/Commission"));
 const TeacherList = lazy(() => import("../Teachers/teacherList"));
 const Dashboard = lazy(() => import("../admin/pages/dashboard/Dashboard"));
 const Users = lazy(() => import("../admin/pages/users/Users"));
+const Financial = lazy(() => import("../admin/pages/financial/Financial"));
+const Invoice = lazy(() => import("../admin/pages/invoices/Invoices"));
 const ApprovalTrialPage = lazy(() =>
   import("../admin/pages/approval/ApprovalTrialPage")
 );
@@ -89,6 +91,14 @@ function Router() {
         <Route
           path="/admin/myapproval"
           element={<ProtectedRoute element={<MyApproval />} />}
+        />
+        <Route
+          path="/admin/financial"
+          element={<ProtectedRoute element={<Financial />} />}
+        />
+        <Route
+          path="/admin/invoice"
+          element={<ProtectedRoute element={<Invoice />} />}
         />
       </Routes>
     </Suspense>

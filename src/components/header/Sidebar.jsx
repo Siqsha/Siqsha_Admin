@@ -5,7 +5,10 @@ import { MdOutlineRateReview, MdOutlineSpaceDashboard } from "react-icons/md";
 // import { CgAddR } from "react-icons/cg";
 import { IoSettingsOutline } from "react-icons/io5";
 import { HiOutlineCreditCard, HiOutlineUserGroup } from "react-icons/hi";
+import { BsFileEarmarkCheck } from "react-icons/bs";
 import { FiUsers } from "react-icons/fi";
+import { FaHandHoldingDollar } from "react-icons/fa6";
+import { LiaFileInvoiceDollarSolid } from "react-icons/lia";
 
 function Sidebar() {
   return (
@@ -102,7 +105,7 @@ function Sidebar() {
             }
           >
             <div className="flex items-center gap-[15px] hover:text-white">
-              <HiOutlineCreditCard className="group-hover:text-white text-2xl" />
+              <BsFileEarmarkCheck className="group-hover:text-white text-2xl" />
               <h1 className="mb-0  text-[16px] font-bold leading-[2%] group-hover:text-white">
                 My Approvals
               </h1>
@@ -125,7 +128,7 @@ function Sidebar() {
             </div>
           </NavLink> */}
 
-          {/* <NavLink
+          <NavLink
             to="/admin/coupon"
             className={({ isActive }) =>
               `rounded-[8px] p-[17px] group hover:bg-primary ${
@@ -139,7 +142,7 @@ function Sidebar() {
                 Coupon Management
               </h1>
             </div>
-          </NavLink> */}
+          </NavLink>
 
           {/* <NavLink
             to="/admin/teacherlist"
@@ -169,6 +172,38 @@ function Sidebar() {
               <MdOutlineRateReview className="group-hover:text-white text-2xl" />
               <h1 className="mb-0 text-[16px] font-bold leading-[2%] group-hover:text-white">
                 Feedback
+              </h1>
+            </div>
+          </NavLink>
+
+          <NavLink
+            to="/admin/financial"
+            className={({ isActive }) =>
+              `rounded-[8px] p-[17px] group hover:bg-primary ${
+                isActive ? "bg-primary text-white" : "bg-white text-nevyblue"
+              }`
+            }
+          >
+            <div className="flex items-center gap-[15px] hover:text-white">
+              <FaHandHoldingDollar className="group-hover:text-white text-2xl" />
+              <h1 className="mb-0 text-[16px] font-bold leading-[2%] group-hover:text-white">
+                Financial
+              </h1>
+            </div>
+          </NavLink>
+
+          <NavLink
+            to="/admin/invoice"
+            className={({ isActive }) =>
+              `rounded-[8px] p-[17px] group hover:bg-primary ${
+                isActive ? "bg-primary text-white" : "bg-white text-nevyblue"
+              }`
+            }
+          >
+            <div className="flex items-center gap-[15px] hover:text-white">
+              <LiaFileInvoiceDollarSolid className="group-hover:text-white text-2xl" />
+              <h1 className="mb-0 text-[16px] font-bold leading-[2%] group-hover:text-white">
+                Invoice
               </h1>
             </div>
           </NavLink>
