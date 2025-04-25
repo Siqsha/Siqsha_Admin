@@ -1,125 +1,136 @@
 import { useEffect, useState } from "react";
 import CommonLayout from "../../components/common/CommonLayout";
-import { getCommissionList } from "../services/apis/userApi";
-import CommissionModal from "../../model/CommissionModal";
+import { getCommissionSummary } from "../services/apis/userApi";
 
 const Commission = () => {
-  // const [selectedStatus, setSelectedStatus] = useState("All");
-  const [users, setUsers] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedUser, setSelectedUser] = useState(null);
+  const [data, setData] = useState([]);
+  const [pagination, setPagination] = useState({
+    currentPage: 1,
+    totalPages: 1,
+  });
+  const [loading, setLoading] = useState(true);
 
-  const fetchCommissionUsers = async () => {
+  const fetchCommissionSummary = async (page = 1) => {
     try {
-      const response = await getCommissionList();
-      if (response.users) {
-        setUsers(response.users);
-      }
+      setLoading(true);
+      const res = await getCommissionSummary(page);
+      setData(res.data);
+      setPagination({
+        currentPage: res.currentPage,
+        totalPages: res.totalPages,
+      });
     } catch (error) {
-      console.error("Error fetching users:", error);
+      console.error("Error fetching commission summary:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchCommissionUsers();
+    fetchCommissionSummary(pagination.currentPage);
   }, []);
 
-  const handleAddCommission = (user) => {
-    setSelectedUser(user);
-    setIsModalOpen(true);
+  const handlePageChange = (newPage) => {
+    fetchCommissionSummary(newPage);
   };
 
   return (
     <CommonLayout title={"Commission"}>
       <div className="mt-8 flow-root bg-white">
         <div className="md:p-8 p-4">
-          {/* <div className="flex justify-end mb-4 mt-4">
-            <input
-              type="text"
-              placeholder="Search"
-              className="border p-2 rounded w-1/3"
-            />
-            <select
-              className="border p-2 rounded"
-              onChange={(e) => setSelectedStatus(e.target.value)}
-            >
-              <option value="All">Status</option>
-              <option value="Weekly">Weekly</option>
-              <option value="Monthly">Monthly</option>
-              <option value="Per transaction">Per Class</option>
-            </select>
-          </div> */}
           <div className=" overflow-auto mt-4">
-            <table className="min-w-full ">
+            <table className="min-w-full divide-y divide-gray-300">
               <thead>
-                <tr className="bg-[#D9D9D9]">
-                  <th className="p-2 text-[#524C4C]">USER NAME</th>
-                  <th className="p-2 text-[#524C4C]">ROLE</th>
-                  <th className="p-2 text-[#524C4C]">EMAIL</th>
-                  <th className="p-2 text-[#524C4C]">PER CLASS</th>
-                  <th className="p-2 text-[#524C4C]">MONTHLY</th>
-                  <th className="p-2 text-[#524C4C]">YEARLY</th>
-                  {/* <th className="border p-2">REMARK</th>*/}
-                  <th className="p-2 text-[#524C4C] ">ACTION</th>
+                <tr>
+                  <th
+                    scope="col"
+                    className="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0 whitespace-nowrap"
+                  >
+                    Email
+                  </th>
+                  <th
+                    scope="col"
+                    className="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0 whitespace-nowrap"
+                  >
+                    Class Name
+                  </th>
+                  <th
+                    scope="col"
+                    className="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0 whitespace-nowrap"
+                  >
+                    Total Admin Fee ($)
+                  </th>
+                  <th
+                    scope="col"
+                    className="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0 whitespace-nowrap"
+                  >
+                    Teacher Receives ($)
+                  </th>
+                  {/* <th
+                    scope="col"
+                    className="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0 whitespace-nowrap"
+                  >
+                    Invoice Count
+                  </th> */}
                 </tr>
               </thead>
-              <tbody className=" text-center ">
-                {users?.map((user, index) => (
-                  <tr key={index} className="text-center ">
-                    <td className="text-[#524C4C] px-2 py-4 ">
-                      {user.user.firstName} {user.user.lastName}
-                    </td>
-                    <td className="text-[#524C4C] px-2 py-4">
-                      {user.user.role}
-                    </td>
-                    <td className="text-[#524C4C] px-2 py-4">
-                      {user.user.email}
-                    </td>
-                    <td className="text-[#524C4C] px-2 py-4">
-                      <input
-                        type="checkbox"
-                        checked={user.commission === "perclass" ? "✔" : ""}
-                        className="accent-primary w-[24px] h-[24px] rounded-[4px]"
-                        readOnly
-                      />
-                    </td>
-                    <td className="text-[#524C4C] px-2 py-4">
-                      <input
-                        type="checkbox"
-                        checked={user.commission === "monthly" ? "✔" : ""}
-                        className="accent-primary w-[24px] h-[24px] rounded-[4px]"
-                        readOnly
-                      />
-                    </td>
-                    <td className="text-[#524C4C] px-2 py-4">
-                      <input
-                        type="checkbox"
-                        checked={user.commission === "yearly" ? "✔" : ""}
-                        className="accent-primary w-[24px] h-[24px] rounded-[4px]"
-                        readOnly
-                      />
-                    </td>
-
-                    <td className="px-2 py-4">
-                      <button
-                        className="bg-primary text-white px-3 py-1 rounded  transition"
-                        onClick={() => handleAddCommission(user)}
-                      >
-                        Add Commission
-                      </button>
+              <tbody className="divide-y divide-gray-200 bg-white text-center">
+                {!loading && data?.length > 0 ? (
+                  data.map((item, index) => (
+                    <tr key={index}>
+                      <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500 ">
+                        {item._id.email}
+                      </td>
+                      <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500 capitalize ">
+                        {item._id.classTitle}
+                      </td>
+                      <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500 capitalize">
+                        ${item.totalAdminFee}
+                      </td>
+                      <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500 capitalize">
+                        ${item.totalTeacherReceives}
+                      </td>
+                      {/* <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500 capitalize">
+                        {item.count}
+                      </td> */}
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="5" className="p-4 text-center">
+                      {loading ? "Loading..." : "No data available"}
                     </td>
                   </tr>
-                ))}
+                )}
               </tbody>
             </table>
           </div>
+          <div className="flex items-center justify-end gap-6 mt-6 pb-3">
+            <button
+              disabled={pagination.currentPage === 1}
+              onClick={() => handlePageChange(pagination.currentPage - 1)}
+              className={`px-4 py-2 text-sm font-medium text-white bg-primary rounded ${
+                pagination.currentPage === 1 && "opacity-50 cursor-not-allowed"
+              }`}
+            >
+              Previous
+            </button>
+            <span className="text-sm font-medium">
+              Page {pagination.currentPage} of {pagination.totalPages}
+            </span>
+            <button
+              disabled={pagination.currentPage === pagination.totalPages}
+              onClick={() => handlePageChange(pagination.currentPage + 1)}
+              className={`px-4 py-2 text-sm font-medium text-white bg-primary rounded ${
+                pagination.currentPage === pagination.totalPages &&
+                "opacity-50 cursor-not-allowed"
+              }`}
+            >
+              Next
+            </button>
+          </div>
         </div>
       </div>
-      <CommissionModal
-        open={isModalOpen}
-        setOpen={setIsModalOpen}
-        selectedUser={selectedUser}
-      />
     </CommonLayout>
   );
 };

@@ -9,6 +9,7 @@ import { BsFileEarmarkCheck } from "react-icons/bs";
 import { FiUsers } from "react-icons/fi";
 import { FaHandHoldingDollar } from "react-icons/fa6";
 import { LiaFileInvoiceDollarSolid } from "react-icons/lia";
+import { GiReceiveMoney } from "react-icons/gi";
 
 function Sidebar() {
   return (
@@ -76,22 +77,6 @@ function Sidebar() {
               </svg>
               <h1 className="mb-0  text-[16px] font-bold leading-[2%] group-hover:text-white">
                 Ad Management
-              </h1>
-            </div>
-          </NavLink> */}
-
-          {/* <NavLink
-            to="/admin/commission"
-            className={({ isActive }) =>
-              `rounded-[8px] p-[17px] group hover:bg-primary ${
-                isActive ? "bg-primary text-white" : "bg-white text-nevyblue"
-              }`
-            }
-          >
-            <div className="flex items-center gap-[15px] hover:text-white">
-              <HiOutlineCreditCard className="group-hover:text-white text-2xl" />
-              <h1 className="mb-0  text-[16px] font-bold leading-[2%] group-hover:text-white">
-                Commission
               </h1>
             </div>
           </NavLink> */}
@@ -204,6 +189,22 @@ function Sidebar() {
               <LiaFileInvoiceDollarSolid className="group-hover:text-white text-2xl" />
               <h1 className="mb-0 text-[16px] font-bold leading-[2%] group-hover:text-white">
                 Invoice
+              </h1>
+            </div>
+          </NavLink>
+
+          <NavLink
+            to="/admin/commission"
+            className={({ isActive }) =>
+              `rounded-[8px] p-[17px] group hover:bg-primary ${
+                isActive ? "bg-primary text-white" : "bg-white text-nevyblue"
+              }`
+            }
+          >
+            <div className="flex items-center gap-[15px] hover:text-white">
+              <GiReceiveMoney className="group-hover:text-white text-2xl" />
+              <h1 className="mb-0  text-[16px] font-bold leading-[2%] group-hover:text-white">
+                Commission
               </h1>
             </div>
           </NavLink>

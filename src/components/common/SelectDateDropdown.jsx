@@ -6,13 +6,9 @@ import "react-datepicker/dist/react-datepicker.css";
 const SelectDateDropdown = ({ onDateChange, selectedDates }) => {
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
-  // const [dateRange, setDateRange] = useState({
-  //   startDate: null,
-  //   endDate: null,
-  // });
   useEffect(() => {
     if (selectedDates === null) {
-      setDateRange([null, null]); // Reset to no selection
+      setDateRange([null, null]);
     }
   }, [selectedDates]);
 

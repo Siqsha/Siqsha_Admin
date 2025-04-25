@@ -97,7 +97,6 @@ export const getFilteredSubscriptions = (role, filters = {}, page = 1) => {
         `/subscription-filter/${role}`, params
       );
 
-      console.log('response', response)
       dispatch(fetchFilterTransctionSuccess({
         data: response.data,
         pagination: response.pagination
@@ -184,4 +183,8 @@ export const respondCredibility = async (formData) => {
 
 export const handleCalculateCommission = async (formData) => {
   return await handleApiRequest("POST", "/calculateTeacherFee", formData)
+}
+
+export const getCommissionSummary = async (page = 1, limit = 20) => {
+  return await handleApiRequest("GET", `/get-commission-list?page=${page}&limit=${limit}`)
 }

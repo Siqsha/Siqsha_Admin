@@ -32,7 +32,6 @@ export const handleApiRequest = async (method, endpoint, payload = {}, useAuthIn
             url: endpoint,
         };
 
-        // Handle GET differently to use query params
         if (method.toLowerCase() === "get") {
             config.params = payload;
         } else {

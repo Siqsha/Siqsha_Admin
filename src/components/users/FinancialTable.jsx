@@ -1,7 +1,7 @@
 import React from "react";
 import dayjs from "dayjs";
 import UserImage from "../../assets/Images/UserImage.png";
-import UserTableSkeleton from "../skeleton/UserTableSkeleton";
+import InvoiceSkeleton from "../skeleton/invoiceSkeleton";
 
 function FinancialTable({ subscriptions, loading, pagination, onPageChange }) {
   const handlePageChange = (newPage) => {
@@ -10,11 +10,11 @@ function FinancialTable({ subscriptions, loading, pagination, onPageChange }) {
     }
   };
 
-
   return (
     <div className="px-4 sm:px-6 lg:px-8">
-      {loading && <UserTableSkeleton />}
-      {!loading && (
+      {loading ? (
+        <InvoiceSkeleton />
+      ) : (
         <div>
           <div className="mt-8 flow-root">
             <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -69,7 +69,7 @@ function FinancialTable({ subscriptions, loading, pagination, onPageChange }) {
                             </div>
                             <div className="ml-4">
                               <div className="font-medium text-gray-900 capitalize">
-                              {sub.userId?.firstName} {sub.userId?.lastName}
+                                {sub.userId?.firstName} {sub.userId?.lastName}
                               </div>
                             </div>
                           </div>
