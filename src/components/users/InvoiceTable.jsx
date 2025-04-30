@@ -1,12 +1,18 @@
 import React, { useState } from "react";
 import dayjs from "dayjs";
 import UserImage from "../../assets/Images/UserImage.png";
-import { handleCalculateCommission } from "../../pages/services/apis/userApi";
+import {
+  getInvoiceList,
+  handleCalculateCommission,
+} from "../../pages/services/apis/userApi";
 import { useMessageModal } from "../../contexts/MessageModalContext";
 import InvoiceSkeleton from "../skeleton/invoiceSkeleton";
+import { useDispatch } from "react-redux";
 
 function InvoiceTable({ invoices, loading, pagination, onPageChange }) {
   const [commissionAdded, setCommissionAdded] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
+  const dispatch = useDispatch();
 
   const { showMessageModal } = useMessageModal();
 
@@ -16,7 +22,7 @@ function InvoiceTable({ invoices, loading, pagination, onPageChange }) {
     }
   };
 
-  const handleViewCommission = async (teacherId, amount, invoiceId) => {
+  const handleCommission = async (teacherId, amount, invoiceId) => {
     try {
       const response = await handleCalculateCommission({
         teacherId,
@@ -30,6 +36,7 @@ function InvoiceTable({ invoices, loading, pagination, onPageChange }) {
         }));
         showMessageModal(response);
       }
+      dispatch(getInvoiceList(true, currentPage));
     } catch (error) {
       console.error("Failed to fetch commission:", error);
     }
@@ -99,39 +106,35 @@ function InvoiceTable({ invoices, loading, pagination, onPageChange }) {
                             <div className="size-11 shrink-0">
                               <img
                                 alt="profile"
-                                src={
-                                  invoice.teacherId?.profileImageUrl ||
-                                  UserImage
-                                }
+                                src={invoice?.profileImageUrl || UserImage}
                                 className="size-11 rounded-full"
                                 onError={(e) => (e.target.src = UserImage)}
                               />
                             </div>
                             <div className="ml-4">
                               <div className="font-medium text-gray-900 capitalize">
-                                {invoice.teacherId?.firstName}{" "}
-                                {invoice.teacherId?.lastName}
+                                {invoice.firstName} {invoice.lastName}
                               </div>
                             </div>
                           </div>
                         </td>
                         <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-900">
-                          <div className="text-gray-900">
-                            {invoice.teacherId?.email}
-                          </div>
+                          <div className="text-gray-900">{invoice.email}</div>
                         </td>
                         <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-900 capitalize">
                           {invoice.className}
                         </td>
                         <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-900">
-                          <div className="text-gray-900">${invoice.amount}</div>
+                          <div className="text-gray-900">
+                            {invoice?.symbolNative} {invoice.amount}
+                          </div>
                         </td>
 
                         <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-900 capitalize">
                           {dayjs(invoice.updatedAt).format("DD MMM YYYY")}
                         </td>
                         <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-900">
-                          {commissionAdded[invoice._id] ? (
+                          {invoice.isAdded ? (
                             <button
                               disabled
                               className="inline-flex items-center rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-white cursor-not-allowed opacity-[0.8]"
@@ -141,8 +144,8 @@ function InvoiceTable({ invoices, loading, pagination, onPageChange }) {
                           ) : (
                             <button
                               onClick={() =>
-                                handleViewCommission(
-                                  invoice.teacherId._id,
+                                handleCommission(
+                                  invoice.teacherId,
                                   invoice.amount,
                                   invoice._id
                                 )

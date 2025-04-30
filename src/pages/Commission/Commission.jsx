@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import CommonLayout from "../../components/common/CommonLayout";
 import { getCommissionSummary } from "../services/apis/userApi";
+import UserImage from "../../assets/Images/UserImage.png";
 
 const Commission = () => {
   const [data, setData] = useState([]);
@@ -46,6 +47,12 @@ const Commission = () => {
                     scope="col"
                     className="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0 whitespace-nowrap"
                   >
+                    Name
+                  </th>
+                  <th
+                    scope="col"
+                    className="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0 whitespace-nowrap"
+                  >
                     Email
                   </th>
                   <th
@@ -58,13 +65,13 @@ const Commission = () => {
                     scope="col"
                     className="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0 whitespace-nowrap"
                   >
-                    Total Admin Fee ($)
+                    Total Admin Fee
                   </th>
                   <th
                     scope="col"
                     className="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0 whitespace-nowrap"
                   >
-                    Teacher Receives ($)
+                    Teacher Receives
                   </th>
                   {/* <th
                     scope="col"
@@ -78,6 +85,23 @@ const Commission = () => {
                 {!loading && data?.length > 0 ? (
                   data.map((item, index) => (
                     <tr key={index}>
+                      <td className="whitespace-nowrap  py-5 pl-4 pr-3 text-sm sm:pl-0">
+                        <div className="flex items-center">
+                          <div className="size-11 shrink-0">
+                            <img
+                              alt="profile"
+                              src={item._id.profileImageUrl || UserImage}
+                              className="size-11 rounded-full"
+                              onError={(e) => (e.target.src = UserImage)}
+                            />
+                          </div>
+                          <div className="ml-4">
+                            <div className="font-medium text-gray-900 capitalize">
+                              {item._id.firstName} {item._id.lastName}
+                            </div>
+                          </div>
+                        </div>
+                      </td>
                       <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500 ">
                         {item._id.email}
                       </td>
@@ -85,10 +109,10 @@ const Commission = () => {
                         {item._id.classTitle}
                       </td>
                       <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500 capitalize">
-                        ${item.totalAdminFee}
+                        {item?._id.symbolNative} {item.totalAdminFee}
                       </td>
                       <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500 capitalize">
-                        ${item.totalTeacherReceives}
+                        {item?._id.symbolNative} {item.totalTeacherReceives}
                       </td>
                       {/* <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500 capitalize">
                         {item.count}

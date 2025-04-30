@@ -66,12 +66,14 @@ function Navbar() {
     socket.on("connect", handleConnect);
     socket.on("newCommissionRequest", handleNewNotification);
     socket.on("newAdApprovalRequest", handleNewNotification);
+    socket.on("CheckCredibiltyNotification", handleNewNotification);
     socket.on("disconnect", handleDisconnect);
 
     return () => {
       socket.off("connect", handleConnect);
       socket.off("newCommissionRequest", handleNewNotification);
       socket.off("newAdApprovalRequest", handleNewNotification);
+      socket.off("CheckCredibiltyNotification", handleNewNotification);
       socket.off("disconnect", handleDisconnect);
     };
   }, [adminId]);
@@ -163,6 +165,32 @@ function Navbar() {
                       </NavLink>
 
                       <NavLink
+                        to="/admin/admanagement"
+                        className={({ isActive }) =>
+                          `rounded-[8px] p-[17px] group hover:bg-primary ${
+                            isActive
+                              ? "bg-primary text-white"
+                              : "bg-white text-nevyblue"
+                          }`
+                        }
+                      >
+                        <div className="flex items-center gap-[15px] hover:text-white">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            fill="currentColor"
+                            className="group-hover:text-white mi-solid mi-window-dock-undock"
+                            viewBox="0 0 24 24"
+                          >
+                            <path d="M7 4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h14c.55 0 1-.45 1-1V5c0-.55-.45-1-1-1zm13 10H8V7h12zm-4 4H4V8H3c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h14c.55 0 1-.45 1-1v-1z" />
+                          </svg>
+                          <h1 className="mb-0 text-[16px] font-bold leading-[2%] group-hover:text-white">
+                            Ad Management
+                          </h1>
+                        </div>
+                      </NavLink>
+
+                      <NavLink
                         to="/admin/coupon"
                         className={({ isActive }) =>
                           `rounded-[8px] p-[17px] group hover:bg-primary ${
@@ -181,33 +209,6 @@ function Navbar() {
                       </NavLink>
 
                       {/* <NavLink
-                        to="/admin/admanagement"
-                        className={({ isActive }) =>
-                          `rounded-[8px] p-[17px] group hover:bg-primary ${
-                            isActive
-                              ? "bg-primary text-white"
-                              : "bg-white text-nevyblue"
-                          }`
-                        }
-                      >
-                        <div className="flex items-center gap-[15px] hover:text-white">
-                          
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="20"
-                            fill="currentColor"
-                            className="group-hover:text-white mi-solid mi-window-dock-undock"
-                            viewBox="0 0 24 24"
-                          >
-                            <path d="M7 4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h14c.55 0 1-.45 1-1V5c0-.55-.45-1-1-1zm13 10H8V7h12zm-4 4H4V8H3c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h14c.55 0 1-.45 1-1v-1z" />
-                          </svg>
-                          <h1 className="mb-0 text-[16px] font-bold leading-[2%] group-hover:text-white">
-                            Ad Management
-                          </h1>
-                        </div>
-                      </NavLink> */}
-
-                      {/* <NavLink
                         to="/admin/teacherlist"
                         className={({ isActive }) =>
                           `rounded-[8px] p-[17px] group hover:bg-primary ${
@@ -224,24 +225,6 @@ function Navbar() {
                           </h1>
                         </div>
                       </NavLink> */}
-
-                      <NavLink
-                        to="/admin/review"
-                        className={({ isActive }) =>
-                          `rounded-[8px] p-[17px] group hover:bg-primary ${
-                            isActive
-                              ? "bg-primary text-white"
-                              : "bg-white text-nevyblue"
-                          }`
-                        }
-                      >
-                        <div className="flex items-center gap-[15px] hover:text-white">
-                          <MdOutlineRateReview className="group-hover:text-white" />
-                          <h1 className="mb-0 text-[16px] font-bold leading-[2%] group-hover:text-white">
-                            Feedback
-                          </h1>
-                        </div>
-                      </NavLink>
 
                       <NavLink
                         to="/admin/financial"
@@ -293,6 +276,24 @@ function Navbar() {
                           <GiReceiveMoney className="group-hover:text-white" />
                           <h1 className="mb-0 text-[16px] font-bold leading-[2%] group-hover:text-white">
                             Commission
+                          </h1>
+                        </div>
+                      </NavLink>
+
+                      <NavLink
+                        to="/admin/review"
+                        className={({ isActive }) =>
+                          `rounded-[8px] p-[17px] group hover:bg-primary ${
+                            isActive
+                              ? "bg-primary text-white"
+                              : "bg-white text-nevyblue"
+                          }`
+                        }
+                      >
+                        <div className="flex items-center gap-[15px] hover:text-white">
+                          <MdOutlineRateReview className="group-hover:text-white" />
+                          <h1 className="mb-0 text-[16px] font-bold leading-[2%] group-hover:text-white">
+                            Feedback
                           </h1>
                         </div>
                       </NavLink>

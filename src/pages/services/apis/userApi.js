@@ -17,7 +17,6 @@ export const getAllUsers = (role, forceRefresh, page) => {
   };
 };
 
-
 export const getSubscriptionsByRole = (role, forceRefresh, page = 1) => {
   return async (dispatch) => {
     dispatch(fetchUsersTransction());
