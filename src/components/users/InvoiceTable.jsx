@@ -14,6 +14,7 @@ function InvoiceTable({ invoices, loading, pagination, onPageChange }) {
   const [currentPage, setCurrentPage] = useState(1);
   const dispatch = useDispatch();
 
+
   const { showMessageModal } = useMessageModal();
 
   const handlePageChange = (newPage) => {
@@ -44,9 +45,8 @@ function InvoiceTable({ invoices, loading, pagination, onPageChange }) {
 
   return (
     <div className="px-4 sm:px-6 lg:px-8">
-      {loading ? (
-        <InvoiceSkeleton />
-      ) : (
+        {loading && <InvoiceSkeleton />}
+        {!loading && (
         <div>
           <div className="mt-8 flow-root">
             <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -72,12 +72,6 @@ function InvoiceTable({ invoices, loading, pagination, onPageChange }) {
                       >
                         Class Name
                       </th>
-                      {/* <th
-                        scope="col"
-                        className="px-3 py-3.5 text-center text-sm font-semibold text-gray-900 whitespace-nowrap"
-                      >
-                        Subsciption
-                      </th> */}
                       <th
                         scope="col"
                         className="px-3 py-3.5 text-center text-sm font-semibold text-gray-900 whitespace-nowrap"

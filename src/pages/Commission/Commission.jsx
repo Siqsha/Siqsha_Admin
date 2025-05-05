@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import CommonLayout from "../../components/common/CommonLayout";
 import { getCommissionSummary } from "../services/apis/userApi";
 import UserImage from "../../assets/Images/UserImage.png";
+import CommissionSkeleton from "../../components/skeleton/CommissionSkeleton";
 
 const Commission = () => {
   const [data, setData] = useState([]);
@@ -37,123 +38,123 @@ const Commission = () => {
 
   return (
     <CommonLayout title={"Commission"}>
-      <div className="mt-8 flow-root bg-white">
-        <div className="md:p-8 p-4">
-          <div className=" overflow-auto mt-4">
-            <table className="min-w-full divide-y divide-gray-300">
-              <thead>
-                <tr>
-                  <th
-                    scope="col"
-                    className="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0 whitespace-nowrap"
-                  >
-                    Name
-                  </th>
-                  <th
-                    scope="col"
-                    className="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0 whitespace-nowrap"
-                  >
-                    Email
-                  </th>
-                  <th
-                    scope="col"
-                    className="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0 whitespace-nowrap"
-                  >
-                    Class Name
-                  </th>
-                  <th
-                    scope="col"
-                    className="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0 whitespace-nowrap"
-                  >
-                    Total Admin Fee
-                  </th>
-                  <th
-                    scope="col"
-                    className="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0 whitespace-nowrap"
-                  >
-                    Teacher Receives
-                  </th>
-                  {/* <th
+      <div className="px-4 sm:px-6 lg:px-8">
+        {loading && <CommissionSkeleton />}
+        {!loading && (
+          <div>
+            <div className="mt-8 flow-root bg-white">
+              <div className="md:p-8 p-4">
+                <div className=" overflow-auto mt-4">
+                  <table className="min-w-full divide-y divide-gray-300">
+                    <thead>
+                      <tr>
+                        <th
+                          scope="col"
+                          className="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0 whitespace-nowrap"
+                        >
+                          Name
+                        </th>
+                        <th
+                          scope="col"
+                          className="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0 whitespace-nowrap"
+                        >
+                          Email
+                        </th>
+                        <th
+                          scope="col"
+                          className="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0 whitespace-nowrap"
+                        >
+                          Class Name
+                        </th>
+                        <th
+                          scope="col"
+                          className="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0 whitespace-nowrap"
+                        >
+                          Total Admin Fee
+                        </th>
+                        <th
+                          scope="col"
+                          className="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0 whitespace-nowrap"
+                        >
+                          Teacher Receives
+                        </th>
+                        {/* <th
                     scope="col"
                     className="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0 whitespace-nowrap"
                   >
                     Invoice Count
                   </th> */}
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-200 bg-white text-center">
-                {!loading && data?.length > 0 ? (
-                  data.map((item, index) => (
-                    <tr key={index}>
-                      <td className="whitespace-nowrap  py-5 pl-4 pr-3 text-sm sm:pl-0">
-                        <div className="flex items-center">
-                          <div className="size-11 shrink-0">
-                            <img
-                              alt="profile"
-                              src={item._id.profileImageUrl || UserImage}
-                              className="size-11 rounded-full"
-                              onError={(e) => (e.target.src = UserImage)}
-                            />
-                          </div>
-                          <div className="ml-4">
-                            <div className="font-medium text-gray-900 capitalize">
-                              {item._id.firstName} {item._id.lastName}
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-200 bg-white text-center">
+                      {data.map((item, index) => (
+                        <tr key={index}>
+                          <td className="whitespace-nowrap  py-5 pl-4 pr-3 text-sm sm:pl-0">
+                            <div className="flex items-center">
+                              <div className="size-11 shrink-0">
+                                <img
+                                  alt="profile"
+                                  src={item._id.profileImageUrl || UserImage}
+                                  className="size-11 rounded-full"
+                                  onError={(e) => (e.target.src = UserImage)}
+                                />
+                              </div>
+                              <div className="ml-4">
+                                <div className="font-medium text-gray-900 capitalize">
+                                  {item._id.firstName} {item._id.lastName}
+                                </div>
+                              </div>
                             </div>
-                          </div>
-                        </div>
-                      </td>
-                      <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500 ">
-                        {item._id.email}
-                      </td>
-                      <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500 capitalize ">
-                        {item._id.classTitle}
-                      </td>
-                      <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500 capitalize">
-                        {item?._id.symbolNative} {item.totalAdminFee}
-                      </td>
-                      <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500 capitalize">
-                        {item?._id.symbolNative} {item.totalTeacherReceives}
-                      </td>
-                      {/* <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500 capitalize">
+                          </td>
+                          <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-900 ">
+                            {item._id.email}
+                          </td>
+                          <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-900 capitalize ">
+                            {item._id.classTitle}
+                          </td>
+                          <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-900 capitalize">
+                            {item?._id.symbolNative} {item.totalAdminFee}
+                          </td>
+                          <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-900 capitalize">
+                            {item?._id.symbolNative} {item.totalTeacherReceives}
+                          </td>
+                          {/* <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500 capitalize">
                         {item.count}
                       </td> */}
-                    </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td colSpan="5" className="p-4 text-center">
-                      {loading ? "Loading..." : "No data available"}
-                    </td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                <div className="flex items-center justify-end gap-6 mt-6 pb-3">
+                  <button
+                    disabled={pagination.currentPage === 1}
+                    onClick={() => handlePageChange(pagination.currentPage - 1)}
+                    className={`px-4 py-2 text-sm font-medium text-white bg-primary rounded ${
+                      pagination.currentPage === 1 &&
+                      "opacity-50 cursor-not-allowed"
+                    }`}
+                  >
+                    Previous
+                  </button>
+                  <span className="text-sm font-medium">
+                    Page {pagination.currentPage} of {pagination.totalPages}
+                  </span>
+                  <button
+                    disabled={pagination.currentPage === pagination.totalPages}
+                    onClick={() => handlePageChange(pagination.currentPage + 1)}
+                    className={`px-4 py-2 text-sm font-medium text-white bg-primary rounded ${
+                      pagination.currentPage === pagination.totalPages &&
+                      "opacity-50 cursor-not-allowed"
+                    }`}
+                  >
+                    Next
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="flex items-center justify-end gap-6 mt-6 pb-3">
-            <button
-              disabled={pagination.currentPage === 1}
-              onClick={() => handlePageChange(pagination.currentPage - 1)}
-              className={`px-4 py-2 text-sm font-medium text-white bg-primary rounded ${
-                pagination.currentPage === 1 && "opacity-50 cursor-not-allowed"
-              }`}
-            >
-              Previous
-            </button>
-            <span className="text-sm font-medium">
-              Page {pagination.currentPage} of {pagination.totalPages}
-            </span>
-            <button
-              disabled={pagination.currentPage === pagination.totalPages}
-              onClick={() => handlePageChange(pagination.currentPage + 1)}
-              className={`px-4 py-2 text-sm font-medium text-white bg-primary rounded ${
-                pagination.currentPage === pagination.totalPages &&
-                "opacity-50 cursor-not-allowed"
-              }`}
-            >
-              Next
-            </button>
-          </div>
-        </div>
+        )}
       </div>
     </CommonLayout>
   );

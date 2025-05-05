@@ -12,9 +12,8 @@ function FinancialTable({ subscriptions, loading, pagination, onPageChange }) {
 
   return (
     <div className="px-4 sm:px-6 lg:px-8">
-      {loading ? (
-        <InvoiceSkeleton />
-      ) : (
+      {loading && <InvoiceSkeleton />}
+      {!loading && (
         <div>
           <div className="mt-8 flow-root">
             <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -83,10 +82,10 @@ function FinancialTable({ subscriptions, loading, pagination, onPageChange }) {
                           <div className="text-gray-900">${sub.amount}</div>
                         </td>
 
-                        <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500 capitalize">
+                        <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-900 capitalize">
                           {dayjs(sub.startDate).format("DD MMM YYYY")}
                         </td>
-                        <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
+                        <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-900">
                           {dayjs(sub.endDate).format("DD MMM YYYY")}
                         </td>
                       </tr>
