@@ -12,7 +12,7 @@ import { GiReceiveMoney } from "react-icons/gi";
 function Sidebar() {
   return (
     <div>
-      <aside className="h-screen bg-white  fixed left-0 top-0 p-[14px_24px] whitespace-nowrap z-10 closed shadow-[0px_0px_10px_-2px_#0000003f] w-[300px] hidden xl:block">
+      <aside className="h-screen bg-white  fixed left-0 top-0 p-[14px_24px] whitespace-nowrap z-10 closed shadow-[0px_0px_10px_-2px_#0000003f] w-[300px] hidden xl:block overflow-auto">
         <div className="mb-10 flex items-center justify-between ">
           <img src={LOGO} alt="" className="max-w-[92px] w-full" />
 

@@ -187,3 +187,4 @@ export const handleCalculateCommission = async (formData) => {
 export const getCommissionSummary = async (page = 1, limit = 20) => {
   return await handleApiRequest("GET", `/get-commission-list?page=${page}&limit=${limit}`)
 }
+

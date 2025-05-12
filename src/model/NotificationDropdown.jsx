@@ -49,7 +49,7 @@ export default function NotificationDropdown({
               <li className="border-b border-b-[#999999] py-2">
                 <div className="flex justify-between">
                   <div className="text-base">Notification</div>
-                  <div className="bg-primary text-white rounded-full text-sm p-1 size-[18px] flex justify-center items-center">
+                  <div className="bg-primary text-white rounded-full text-sm p-1 size-[22px] flex justify-center items-center">
                     {notifications?.length}
                   </div>
                 </div>
@@ -77,7 +77,8 @@ export default function NotificationDropdown({
                   No notifications available
                 </li>
               )}
-
+            </div>
+            <div>
               {notifications?.length > 0 && (
                 <li className="pt-2">
                   <div className="flex items-center justify-between">

@@ -41,6 +41,12 @@ const InvoiceSkeleton = () => {
                   >
                     <Skeleton height={20} width={100} />
                   </th>
+                  <th
+                    scope="col"
+                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                  >
+                    <Skeleton height={20} width={100} />
+                  </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 bg-white">
