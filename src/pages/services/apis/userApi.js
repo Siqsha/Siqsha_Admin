@@ -69,8 +69,8 @@ export const getFilteredTeacherInvoices = (filters = {}, page = 1) => {
       dispatch(fetchFilterInvoiceSuccess({
         data: {
           invoices: response.data.invoices || [],
-          pagination: response.data.pagination || {},
         },
+        pagination: response.pagination || {},
       }));
 
       return response;
@@ -187,4 +187,9 @@ export const handleCalculateCommission = async (formData) => {
 export const getCommissionSummary = async (page = 1, limit = 20) => {
   return await handleApiRequest("GET", `/get-commission-list?page=${page}&limit=${limit}`)
 }
+
+export const getCountry = async () => {
+  return await handleApiRequest("GET", "/get-country")
+}
+
 

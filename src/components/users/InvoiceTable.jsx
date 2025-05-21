@@ -14,7 +14,6 @@ function InvoiceTable({ invoices, loading, pagination, onPageChange }) {
   const [currentPage, setCurrentPage] = useState(1);
   const dispatch = useDispatch();
 
-
   const { showMessageModal } = useMessageModal();
 
   const handlePageChange = (newPage) => {
@@ -45,8 +44,8 @@ function InvoiceTable({ invoices, loading, pagination, onPageChange }) {
 
   return (
     <div className="px-4 sm:px-6 lg:px-8">
-        {loading && <InvoiceSkeleton />}
-        {!loading && (
+      {loading && <InvoiceSkeleton />}
+      {!loading && (
         <div>
           <div className="mt-8 flow-root">
             <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -125,7 +124,7 @@ function InvoiceTable({ invoices, loading, pagination, onPageChange }) {
                         </td>
 
                         <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-900 capitalize">
-                          {dayjs(invoice.updatedAt).format("DD MMM YYYY")}
+                          {dayjs(invoice.invoiceDate).format("DD MMM YYYY")}
                         </td>
                         <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-900">
                           {invoice.isAdded ? (

@@ -60,18 +60,19 @@ function Invoice() {
     };
     setFilters(newFilters);
     setSelectedDates({ startDate, endDate });
-    setCurrentPage(1);
+    // setCurrentPage(1);
   };
 
-  const handleAmountChange = ({ minAmount, maxAmount }) => {
+  const handleAmountChange = ({ minAmount, maxAmount, symbolNative }) => {
     const newFilters = {
       ...filters,
       minAmount,
       maxAmount,
+      symbolNative,
     };
     setFilters(newFilters);
-    setSelectedAmount({ minAmount, maxAmount });
-    setCurrentPage(1);
+    setSelectedAmount({ minAmount, maxAmount, symbolNative });
+    // setCurrentPage(1);
   };
 
   const clearFilters = () => {

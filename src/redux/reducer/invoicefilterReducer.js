@@ -27,7 +27,7 @@ const invoicefilterReducer = (state = initialState, action) => {
                 loading: false,
                 invoicefilters: {
                     invoices: action.payload?.data?.invoices || [],
-                    pagination: action.payload?.data?.pagination || {},
+                    pagination: action.payload?.pagination || {},
                 },
             };
         case FETCH_FILTER_INVOICE_FAILURE:
