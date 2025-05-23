@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import UserImage from "../../assets/Images/UserImage.png";
 import {
+  getFilteredTeacherInvoices,
   getInvoiceList,
   handleCalculateCommission,
 } from "../../pages/services/apis/userApi";
@@ -9,7 +10,13 @@ import { useMessageModal } from "../../contexts/MessageModalContext";
 import InvoiceSkeleton from "../skeleton/invoiceSkeleton";
 import { useDispatch } from "react-redux";
 
-function InvoiceTable({ invoices, loading, pagination, onPageChange }) {
+function InvoiceTable({
+  invoices,
+  loading,
+  filters,
+  pagination,
+  onPageChange,
+}) {
   const [commissionAdded, setCommissionAdded] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
   const dispatch = useDispatch();
@@ -36,7 +43,14 @@ function InvoiceTable({ invoices, loading, pagination, onPageChange }) {
         }));
         showMessageModal(response);
       }
-      dispatch(getInvoiceList(true, currentPage));
+
+      if (Object.keys(filters).length > 0) {
+        dispatch(getFilteredTeacherInvoices(filters, currentPage));
+      } else {
+        dispatch(getInvoiceList(true, currentPage));
+      }
+
+      // dispatch(getInvoiceList(true, currentPage));
     } catch (error) {
       console.error("Failed to fetch commission:", error);
     }
@@ -127,7 +141,7 @@ function InvoiceTable({ invoices, loading, pagination, onPageChange }) {
                           {dayjs(invoice.invoiceDate).format("DD MMM YYYY")}
                         </td>
                         <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-900">
-                          {invoice.isAdded ? (
+                          {invoice.isAdded || commissionAdded[invoice._id] ? (
                             <button
                               disabled
                               className="inline-flex items-center rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-white cursor-not-allowed opacity-[0.8]"

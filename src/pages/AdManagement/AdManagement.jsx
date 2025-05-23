@@ -9,16 +9,24 @@ import UserImage from "../../assets/Images/UserImage.png";
 const AdManagement = () => {
   const [updatingStatus, setUpdatingStatus] = useState({});
   const [teachers, setTeachers] = useState([]);
+  const [pagination, setPagination] = useState({
+    currentPage: 1,
+    totalPages: 1,
+  });
   const [loading, setLoading] = useState(false);
   const { showMessageModal } = useMessageModal();
   const { showConfirmationModal } = useConfirmationModal();
 
-  const fetchTeacherList = async () => {
+  const fetchTeacherList = async (page = 1) => {
     setLoading(true);
     try {
-      const response = await getAdRequsetUsers();
+      const response = await getAdRequsetUsers(page);
       if (Array.isArray(response.data)) {
         setTeachers(response.data);
+        setPagination({
+          currentPage: response.pagination.currentPage,
+          totalPages: response.pagination.totalPages,
+        });
       } else {
         console.error("Unexpected API response format:", response);
       }
@@ -28,20 +36,22 @@ const AdManagement = () => {
 
   // Run fetch function on component mount
   useEffect(() => {
-    fetchTeacherList();
+    fetchTeacherList(1);
   }, []);
+
+  const handlePageChange = (newPage) => {
+    fetchTeacherList(newPage);
+  };
 
   const handleAdlUpdate = async (userId, status) => {
     try {
-      const response = await updateAdrequset({ userId, status }); 
+      const response = await updateAdrequset({ userId, status });
 
       if (response.success) {
         showMessageModal(response);
         setTeachers((prevTeachers) =>
           prevTeachers.map((teacher) =>
-            teacher._id === userId
-              ? { ...teacher, status: status } 
-              : teacher
+            teacher._id === userId ? { ...teacher, status: status } : teacher
           )
         );
       } else {
@@ -162,6 +172,37 @@ const AdManagement = () => {
                         )}
                       </tbody>
                     </table>
+                  </div>
+                  <div className="flex items-center justify-end gap-6 mt-6 pb-3">
+                    <button
+                      disabled={pagination.currentPage === 1}
+                      onClick={() =>
+                        handlePageChange(pagination.currentPage - 1)
+                      }
+                      className={`px-4 py-2 text-sm font-medium text-white bg-primary rounded ${
+                        pagination.currentPage === 1 &&
+                        "opacity-50 cursor-not-allowed"
+                      }`}
+                    >
+                      Previous
+                    </button>
+                    <span className="text-sm font-medium">
+                      Page {pagination.currentPage} of {pagination.totalPages}
+                    </span>
+                    <button
+                      disabled={
+                        pagination.currentPage === pagination.totalPages
+                      }
+                      onClick={() =>
+                        handlePageChange(pagination.currentPage + 1)
+                      }
+                      className={`px-4 py-2 text-sm font-medium text-white bg-primary rounded ${
+                        pagination.currentPage === pagination.totalPages &&
+                        "opacity-50 cursor-not-allowed"
+                      }`}
+                    >
+                      Next
+                    </button>
                   </div>
                 </div>
               </div>
