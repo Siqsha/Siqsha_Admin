@@ -90,6 +90,7 @@ function Financial() {
         <SelectAmountDropdown
           onAmountChange={handleAmountChange}
           selectedAmount={selectedAmount}
+          hideCurrency={true}
         />
         <button
           onClick={() => {

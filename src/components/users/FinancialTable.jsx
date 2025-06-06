@@ -54,42 +54,60 @@ function FinancialTable({ subscriptions, loading, pagination, onPageChange }) {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200 bg-white text-center">
-                    {subscriptions?.map((sub, index) => (
-                      <tr key={sub._id || index}>
-                        <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
-                          <div className="flex items-center">
-                            <div className="size-11 shrink-0">
-                              <img
-                                alt="profile"
-                                src={sub.userId?.profileImageUrl || UserImage}
-                                className="size-11 rounded-full"
-                                onError={(e) => (e.target.src = UserImage)}
-                              />
-                            </div>
-                            <div className="ml-4">
-                              <div className="font-medium text-gray-900 capitalize">
-                                {sub.userId?.firstName} {sub.userId?.lastName}
+                    {subscriptions && subscriptions.length > 0 ? (
+                      subscriptions
+                        ?.filter(
+                          (sub) => sub.userId?.firstName || sub.userId?.lastName
+                        )
+                        .map((sub, index) => (
+                          <tr key={sub._id || index}>
+                            <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
+                              <div className="flex items-center">
+                                <div className="size-11 shrink-0">
+                                  <img
+                                    alt="profile"
+                                    src={
+                                      sub.userId?.profileImageUrl || UserImage
+                                    }
+                                    className="size-11 rounded-full"
+                                    onError={(e) => (e.target.src = UserImage)}
+                                  />
+                                </div>
+                                <div className="ml-4">
+                                  <div className="font-medium text-gray-900 capitalize">
+                                    {sub.userId?.firstName}{" "}
+                                    {sub.userId?.lastName}
+                                  </div>
+                                </div>
                               </div>
-                            </div>
-                          </div>
-                        </td>
-                        <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-                          <div className="text-gray-900">
-                            {sub.userId?.email}
-                          </div>
-                        </td>
-                        <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-                          <div className="text-gray-900">${sub.amount}</div>
-                        </td>
+                            </td>
+                            <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
+                              <div className="text-gray-900">
+                                {sub.userId?.email}
+                              </div>
+                            </td>
+                            <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
+                              <div className="text-gray-900">${sub.amount}</div>
+                            </td>
 
-                        <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-900 capitalize">
-                          {dayjs(sub.startDate).format("DD MMM YYYY")}
-                        </td>
-                        <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-900">
-                          {dayjs(sub.endDate).format("DD MMM YYYY")}
+                            <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-900 capitalize">
+                              {dayjs(sub.startDate).format("DD MMM YYYY")}
+                            </td>
+                            <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-900">
+                              {dayjs(sub.endDate).format("DD MMM YYYY")}
+                            </td>
+                          </tr>
+                        ))
+                    ) : (
+                      <tr>
+                        <td
+                          colSpan="5"
+                          className="py-10 text-gray-700 text-center text-lg"
+                        >
+                          No data found.
                         </td>
                       </tr>
-                    ))}
+                    )}
                   </tbody>
                 </table>
               </div>

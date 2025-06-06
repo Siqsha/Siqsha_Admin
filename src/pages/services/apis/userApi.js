@@ -192,4 +192,7 @@ export const getCountry = async () => {
   return await handleApiRequest("GET", "/get-country")
 }
 
+export const getTotalUsers = async () => {
+  return await handleApiRequest("GET", "/get-data")
+}
 

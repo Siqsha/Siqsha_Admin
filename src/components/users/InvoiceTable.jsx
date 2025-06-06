@@ -106,65 +106,76 @@ function InvoiceTable({
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200 bg-white text-center">
-                    {invoices?.map((invoice, index) => (
-                      <tr key={invoice._id || index}>
-                        <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
-                          <div className="flex items-center">
-                            <div className="size-11 shrink-0">
-                              <img
-                                alt="profile"
-                                src={invoice?.profileImageUrl || UserImage}
-                                className="size-11 rounded-full"
-                                onError={(e) => (e.target.src = UserImage)}
-                              />
-                            </div>
-                            <div className="ml-4">
-                              <div className="font-medium text-gray-900 capitalize">
-                                {invoice.firstName} {invoice.lastName}
+                    {invoices && invoices.length > 0 ? (
+                      invoices?.map((invoice, index) => (
+                        <tr key={invoice._id || index}>
+                          <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
+                            <div className="flex items-center">
+                              <div className="size-11 shrink-0">
+                                <img
+                                  alt="profile"
+                                  src={invoice?.profileImageUrl || UserImage}
+                                  className="size-11 rounded-full"
+                                  onError={(e) => (e.target.src = UserImage)}
+                                />
+                              </div>
+                              <div className="ml-4">
+                                <div className="font-medium text-gray-900 capitalize">
+                                  {invoice.firstName} {invoice.lastName}
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        </td>
-                        <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-900">
-                          <div className="text-gray-900">{invoice.email}</div>
-                        </td>
-                        <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-900 capitalize">
-                          {invoice.className}
-                        </td>
-                        <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-900">
-                          <div className="text-gray-900">
-                            {invoice?.symbolNative} {invoice.amount}
-                          </div>
-                        </td>
+                          </td>
+                          <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-900">
+                            <div className="text-gray-900">{invoice.email}</div>
+                          </td>
+                          <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-900 capitalize">
+                            {invoice.className}
+                          </td>
+                          <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-900">
+                            <div className="text-gray-900">
+                              {invoice?.symbolNative} {invoice.amount}
+                            </div>
+                          </td>
 
-                        <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-900 capitalize">
-                          {dayjs(invoice.invoiceDate).format("DD MMM YYYY")}
-                        </td>
-                        <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-900">
-                          {invoice.isAdded || commissionAdded[invoice._id] ? (
-                            <button
-                              disabled
-                              className="inline-flex items-center rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-white cursor-not-allowed opacity-[0.8]"
-                            >
-                              Commission Added
-                            </button>
-                          ) : (
-                            <button
-                              onClick={() =>
-                                handleCommission(
-                                  invoice.teacherId,
-                                  invoice.amount,
-                                  invoice._id
-                                )
-                              }
-                              className="inline-flex items-center rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-white "
-                            >
-                              Add Commission
-                            </button>
-                          )}
+                          <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-900 capitalize">
+                            {dayjs(invoice.invoiceDate).format("DD MMM YYYY")}
+                          </td>
+                          <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-900">
+                            {invoice.isAdded || commissionAdded[invoice._id] ? (
+                              <button
+                                disabled
+                                className="inline-flex items-center rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-white cursor-not-allowed opacity-[0.8]"
+                              >
+                                Commission Added
+                              </button>
+                            ) : (
+                              <button
+                                onClick={() =>
+                                  handleCommission(
+                                    invoice.teacherId,
+                                    invoice.amount,
+                                    invoice._id
+                                  )
+                                }
+                                className="inline-flex items-center rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-white "
+                              >
+                                Add Commission
+                              </button>
+                            )}
+                          </td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr>
+                        <td
+                          colSpan="5"
+                          className="py-10 text-gray-700 text-center text-lg"
+                        >
+                          No data found.
                         </td>
                       </tr>
-                    ))}
+                    )}
                   </tbody>
                 </table>
               </div>
