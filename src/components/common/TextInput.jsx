@@ -30,7 +30,7 @@ const TextInput = ({
   };
   return (
     <div className="w-full">
-      <label className="text-[16px] text-black">
+      <label className="text-[16px] text-black whitespace-nowrap">
         {label}
         {isRequired && (
           <span className="text-red text-[18px] pl-1">*</span>

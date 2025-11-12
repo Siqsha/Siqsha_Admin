@@ -23,7 +23,7 @@ const SelectList = ({
   const isPlaceholder = !value;
   return (
     <div>
-      <label className="w-full text-[16px] text-black">
+      <label className="w-full text-[16px] text-black whitespace-nowrap">
         {label}
         {isRequired && (
           <span className="text-red text-[18px] pl-1">*</span>
@@ -97,4 +97,3 @@ const SelectList = ({
 };
 
 export default SelectList;
-

@@ -140,6 +140,7 @@ const Coupon = () => {
                           label={"Single use/Multiple use"}
                           options={UsePurpose}
                           name="use"
+                          className="whitespace-nowrap"
                           placeholder="Select Use Type"
                           value={values.use}
                           onChange={(e) => {
