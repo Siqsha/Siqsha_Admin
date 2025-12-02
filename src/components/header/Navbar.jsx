@@ -66,6 +66,7 @@ function Navbar() {
     socket.on("connect", handleConnect);
     socket.on("newCommissionRequest", handleNewNotification);
     socket.on("newAdApprovalRequest", handleNewNotification);
+    socket.on("adCreated", handleNewNotification);
     socket.on("CheckCredibiltyNotification", handleNewNotification);
     socket.on("disconnect", handleDisconnect);
 
@@ -73,6 +74,7 @@ function Navbar() {
       socket.off("connect", handleConnect);
       socket.off("newCommissionRequest", handleNewNotification);
       socket.off("newAdApprovalRequest", handleNewNotification);
+      socket.off("adCreated", handleNewNotification);
       socket.off("CheckCredibiltyNotification", handleNewNotification);
       socket.off("disconnect", handleDisconnect);
     };

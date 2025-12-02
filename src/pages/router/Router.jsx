@@ -23,6 +23,7 @@ const ApprovalTrialPage = lazy(() =>
 );
 const Review = lazy(() => import("../Review/Review"));
 const AdManagement = lazy(() => import("../AdManagement/AdManagement"));
+const EditAd = lazy(() => import("../AdManagement/EditAd"));
 const Coupon = lazy(() => import("../Coupon/Coupon"));
 const MyApproval = lazy(() => import("../MyApproval/MyApproval"));
 
@@ -59,6 +60,10 @@ function Router() {
         <Route
           path="/admin/admanagement"
           element={<ProtectedRoute element={<AdManagement />} />}
+        />
+        <Route
+          path="/admin/edit-ad/:id"
+          element={<ProtectedRoute element={<EditAd />} />}
         />
         <Route
           path="/admin/commission"
