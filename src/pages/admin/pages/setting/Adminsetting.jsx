@@ -1,7 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import CommonLayout from "../../../../components/common/CommonLayout";
 import { useModal } from "../../../../contexts/ModalContext";
 import { FaLanguage, FaListAlt } from "react-icons/fa";
+import { MdGavel } from "react-icons/md";
 import { HiPlus } from "react-icons/hi";
 
 function Adminsetting() {
@@ -44,6 +46,15 @@ function Adminsetting() {
             </div>
             <h3 className="text-xl">Manage Categories</h3>
           </div>
+          <Link
+            to="/admin/legal/terms"
+            className="bg-purple-600 p-8 text-white shadow-md flex gap-2 items-center justify-center cursor-pointer hover:bg-purple-700 transition rounded"
+          >
+            <div className="">
+              <MdGavel className="text-4xl" />
+            </div>
+            <h3 className="text-xl">Legal: Terms & Conditions</h3>
+          </Link>
         </div>
       </CommonLayout>
     </>

@@ -9,8 +9,10 @@ const SelectAmountDropdown = ({
   const [minAmount, setMinAmount] = useState("");
   const [maxAmount, setMaxAmount] = useState("");
   const [currency, setCurrency] = useState("");
+  const [selectedSymbol, setSelectedSymbol] = useState("");
   const [currencyOptions, setCurrencyOptions] = useState([]);
   const [open, setOpen] = useState(false);
+  const [search, setSearch] = useState("");
 
   const handleApply = () => {
     const payload = {
@@ -18,7 +20,7 @@ const SelectAmountDropdown = ({
       maxAmount: maxAmount !== "" ? Number(maxAmount) : null,
     };
     if (!hideCurrency) {
-      payload.symbolNative = currency || null;
+      payload.symbolNative = selectedSymbol || null;
     }
     onAmountChange(payload);
   };
@@ -28,19 +30,39 @@ const SelectAmountDropdown = ({
       setMinAmount("");
       setMaxAmount("");
       setCurrency("");
+      setSelectedSymbol("");
+      setSearch("");
     }
   }, [selectedAmount]);
 
   const fetchCountries = async () => {
     try {
       const res = await getCountry();
-      const countries = res.countries;
+      const countries = res.countries || [];
 
-      const uniqueSymbols = Array.from(
-        new Set(countries.map((c) => c.symbolNative).filter(Boolean))
-      );
+      const mapByCode = new Map();
+      const mapBySymbol = new Map();
 
-      setCurrencyOptions(uniqueSymbols);
+      countries.forEach((c) => {
+        const symbol = c?.symbolNative || c?.symbol || "";
+        const code = c?.currency || c?.currencyCode || c?.currency_code || c?.code || "";
+        const name = c?.currencyName || c?.currency_name || c?.name || "";
+
+        if (code) {
+          if (!mapByCode.has(code) && symbol) {
+            mapByCode.set(code, { code, symbol, name });
+          }
+        } else if (symbol && !mapBySymbol.has(symbol)) {
+          mapBySymbol.set(symbol, { code: "", symbol, name });
+        }
+      });
+
+      const options = [
+        ...Array.from(mapByCode.values()),
+        ...Array.from(mapBySymbol.values()),
+      ].sort((a, b) => (a.code || a.symbol).localeCompare(b.code || b.symbol));
+
+      setCurrencyOptions(options);
     } catch (error) {
       console.error("Failed to fetch currency options", error);
     }
@@ -52,10 +74,27 @@ const SelectAmountDropdown = ({
     }
   }, [hideCurrency]);
 
-  const handleSelect = (symbol) => {
-    setCurrency(symbol);
+  const handleSelect = (option) => {
+    const label = option.code ? `${option.code} / ${option.symbol}` : option.symbol;
+    setCurrency(label);
+    setSelectedSymbol(option.symbol || "");
     setOpen(false);
+    setSearch("");
   };
+
+  const normalized = search.trim().toLowerCase();
+  const filteredOptions = !normalized
+    ? currencyOptions
+    : currencyOptions.filter((o) => {
+        const code = o.code || "";
+        const name = o.name || "";
+        const symbol = o.symbol || "";
+        return (
+          (code && code.toLowerCase().startsWith(normalized)) ||
+          (name && name.toLowerCase().startsWith(normalized)) ||
+          (symbol && symbol.toLowerCase().startsWith(normalized))
+        );
+      });
 
   return (
     <div className="flex flex-wrap items-center gap-4">
@@ -80,17 +119,28 @@ const SelectAmountDropdown = ({
           </button>
 
           {open && (
-            <ul className="absolute z-10 mt-1 w-full max-h-60 overflow-y-auto bg-white border border-gray-300 rounded-lg shadow-lg">
-              {currencyOptions.map((symbol) => (
-                <li
-                  key={symbol}
-                  onClick={() => handleSelect(symbol)}
-                  className="px-4 py-2 hover:bg-blue-100 cursor-pointer"
-                >
-                  {symbol}
-                </li>
-              ))}
-            </ul>
+            <div className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-lg shadow-lg">
+              <div className="p-2 border-b">
+                <input
+                  type="text"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder="Search currency"
+                  className="w-full px-2 py-1 border rounded"
+                />
+              </div>
+              <ul className="max-h-60 overflow-y-auto">
+                {filteredOptions.map((opt) => (
+                  <li
+                    key={(opt.code || "no-code") + opt.symbol}
+                    onClick={() => handleSelect(opt)}
+                    className="px-4 py-2 hover:bg-blue-100 cursor-pointer"
+                  >
+                    {opt.code ? `${opt.code} / ${opt.symbol}` : opt.symbol}
+                  </li>
+                ))}
+              </ul>
+            </div>
           )}
         </div>
       )}
